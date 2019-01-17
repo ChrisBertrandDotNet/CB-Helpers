@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CB Helpers WindowsForms</name>
+    </assembly>
+    <members>
+        <member name="T:CB.WindowsForms.FolderSelectDialog">
+            <summary>
+            Lets the user select a folder.
+            <para>This class uses the regular Windows' directory selection window, unlike <see cref="T:System.Windows.Forms.FolderBrowserDialog"/> which displays a very limited window.</para>
+            <para>Requires Windows Vista at least.</para>
+            </summary>
+            <example>
+            	var dialog = new CB.WindowsForms.FolderSelectDialog
+            { DirectoryPath= @"d:\"	}; // initial directory
+            if (dialog.ShowDialog(Handle) == System.Windows.Forms.DialogResult.OK)
+            {
+              var d = dialog.DirectoryPath;
+              ...
+            }
+            </example>
+        </member>
+        <member name="P:CB.WindowsForms.FolderSelectDialog.DirectoryPath">
+            <summary>
+            Initial and resulting directory path.
+            <para>When set before calling <see cref="M:CB.WindowsForms.FolderSelectDialog.ShowDialog(System.Windows.Forms.IWin32Window)"/>, this is the initial directory.</para>
+            <para>After <see cref="M:CB.WindowsForms.FolderSelectDialog.ShowDialog(System.Windows.Forms.IWin32Window)"/>, this is the selected directory.</para>
+            </summary>
+        </member>
+        <member name="M:CB.WindowsForms.FolderSelectDialog.ShowDialog(System.Windows.Forms.IWin32Window)">
+            <summary>
+            Displays the selection window.
+            </summary>
+            <param name="owner">The window which the selection window depends on. If null, this is the default window.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.WindowsForms.FolderSelectDialog.ShowDialog(System.IntPtr)">
+            <summary>
+            Displays the selection window.
+            </summary>
+            <param name="hwndOwner">Handle of the window which the selection window depends on. If null, this is the default window.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("CB Helpers dotnet")]
-[assembly: AssemblyDescription("CB Helpers is a collection of programming helpers for .NET")]
+[assembly: AssemblyDescription("CB Helpers is a collection of programming helpers for .NET. https://github.com/ChrisBertrandDotNet/CB-Helpers")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Christophe Bertrand")]
+[assembly: AssemblyCompany(Common.Library.Company)]
 [assembly: AssemblyProduct("CB Helpers dotnet")]
 [assembly: AssemblyCopyright("Copyright © Christophe Bertrand")]
 [assembly: AssemblyTrademark("")]

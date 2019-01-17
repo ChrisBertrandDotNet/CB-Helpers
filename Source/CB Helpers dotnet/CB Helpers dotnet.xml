@@ -1,0 +1,4141 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CB Helpers dotnet</name>
+    </assembly>
+    <members>
+        <member name="T:CB.Data.ClearBase32">
+            <summary>
+            Transcodes to a clearer version of the Base32 encoding.
+            <para>The character set does not contain characters that could be confounded. Such as 'I' and '1', 'l' and '1', 'O' and '0'.</para>
+            </summary>
+        </member>
+        <member name="F:CB.Data.ClearBase32.CharacterSet">
+            <summary>
+            The 32 characters set.
+            </summary>
+        </member>
+        <member name="F:CB.Data.ClearBase32.CharacterOrder">
+            <summary>
+            The character order set.
+            <para>For example, CharacterOrder['A'] = 0, CharacterOrder['B'] = 1, CharacterOrder['b'] = 1</para>
+            <para>Lower-case characters are included in the set.</para>
+            <para>Invalid characters return -1.</para>
+            </summary>
+        </member>
+        <member name="M:CB.Data.ClearBase32.Encode(System.Byte[])">
+            <summary>
+            Encodes a byte array to a base32 string.
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:CB.Data.ClearBase32.Decode(System.String)">
+            <summary>
+            Decodes a base32 string to a byte array, retreiving the original data.
+            <para>If the source has an invalid format, returns null.</para>
+            <para>The source can contain lower and upper-case letters.</para>
+            </summary>
+            <param name="source"></param>
+            <returns>The decoded byte array, or null if the source format is invalid.</returns>
+        </member>
+        <member name="M:CB.Data.ClearBase32.EncodeText(System.String)">
+            <summary>
+            Encodes the source as UTF-8 then encodes it as a ClearBase32.
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.Text.EncoderFallbackException">An error occured during the UTF-8 encoding.</exception>
+        </member>
+        <member name="M:CB.Data.ClearBase32.DecodeAsText(System.String)">
+            <summary>
+            Decodes the source, then encodes the result as a UTF-8 String.
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentException">The source format is invalid, or the decoded data is not a valid UTF-8 string.</exception>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.Text.DecoderFallbackException">The decoded data is not a valid UTF-8 string.</exception>
+        </member>
+        <member name="M:CB.Data.ClearBase32.EncodeToAByteArray(System.Byte[])">
+            <summary>
+            Encodes a byte array to a base32 string that is in turn coded as its UTF8 binary representation.
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.ClearBase32.DecodeFromByteArray(System.Byte[])">
+            <summary>
+            Decodes a base32 string that was coded as its UTF8 binary representation.
+            </summary>
+            <param name="source">An UTF8 binary representation of the base32 string.</param>
+            <returns>The decoded byte array.</returns>
+        </member>
+        <member name="M:CB.Data.ClearBase32.EncodeTextToAByteArray(System.String)">
+            <summary>
+            Encodes a regular string to a base32 string that is in turn coded as its UTF8 binary representation.
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.ClearBase32.DecodeAsStringFromByteArray(System.Byte[])">
+            <summary>
+            Decodes a base32 string that was coded as its UTF8 binary representation.
+            </summary>
+            <param name="source"></param>
+            <returns>The decoded regular string.</returns>
+        </member>
+        <member name="T:CB.Data.BlockingCollectionAsICollection`1">
+            <summary>
+            Makes System.Collections.Concurrent.BlockingCollection compatible with ICollection&lt;T&gt;.
+            <para>
+            Except:
+            Remove(T item) throws NotSupportedException.
+            </para>
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:CB.Data.BlockingCollectionAsICollection`1.#ctor">
+            <summary>
+            Builds a new collection.
+            </summary>
+        </member>
+        <member name="M:CB.Data.BlockingCollectionAsICollection`1.#ctor(System.Collections.Concurrent.IProducerConsumerCollection{`0})">
+            <summary>
+            Builds a new collection.
+            </summary>
+            <param name="collection"></param>
+        </member>
+        <member name="M:CB.Data.BlockingCollectionAsICollection`1.#ctor(System.Int32)">
+            <summary>
+            Builds a new collection.
+            </summary>
+            <param name="boundedCapacity"></param>
+        </member>
+        <member name="M:CB.Data.BlockingCollectionAsICollection`1.#ctor(System.Collections.Concurrent.IProducerConsumerCollection{`0},System.Int32)">
+            <summary>
+            Builds a new collection.
+            </summary>
+            <param name="collection"></param>
+            <param name="boundedCapacity"></param>
+        </member>
+        <member name="M:CB.Data.BlockingCollectionAsICollection`1.Clear">
+            <summary>
+            Items will be removed one by one.
+            That may be slow for a big collection, as the items are removed one-by-one.
+            </summary>
+        </member>
+        <member name="M:CB.Data.BlockingCollectionAsICollection`1.Contains(`0)">
+            <summary>
+            Returns true if the collection contains this item.
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="P:CB.Data.BlockingCollectionAsICollection`1.IsReadOnly">
+            <summary>
+            Returns true if the collection is read-only.
+            </summary>
+        </member>
+        <member name="M:CB.Data.BlockingCollectionAsICollection`1.Remove(`0)">
+            <summary>
+            Not supported.
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+            <exception cref="T:System.NotSupportedException">Always throw this exception.</exception>
+        </member>
+        <member name="T:CB.Data.IValue`1">
+            <summary>
+            A type that has a main value.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:CB.Data.IValue`1.HasValue">
+            <summary>
+            True if the value is defined.
+            </summary>
+        </member>
+        <member name="P:CB.Data.IValue`1.Value">
+            <summary>
+            Gets the value.
+            </summary>
+        </member>
+        <member name="T:CB.Data.NonNull`1">
+            <summary>
+            Certifies a reference is always defined (non-null).
+            <para>
+            IMPORTANT:
+            Never initialize a blank structure, using default(NonNull&lt;&gt;).
+            And never let a NonNull&lt;&gt; in a field without initializing it with a reference.
+            </para>
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:CB.Data.NonNull`1.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">When trying to get the value of an uninitialized NonNull.</exception>
+            <exception cref="T:System.ArgumentNullException">When trying to set the value to null.</exception>
+        </member>
+        <member name="M:CB.Data.NonNull`1.#ctor(`0)">
+            <summary>
+            Creates a non-null reference.
+            </summary>
+            <param name="value"></param>
+            <exception cref="T:System.ArgumentNullException">The value is a null reference.</exception>
+        </member>
+        <member name="M:CB.Data.NonNull`1.op_Equality(CB.Data.NonNull{`0},CB.Data.NonNull{`0})">
+            <summary>
+            True is a and b are equal.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NonNull`1.op_Inequality(CB.Data.NonNull{`0},CB.Data.NonNull{`0})">
+            <summary>
+            True if a and b are different.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NonNull`1.op_Equality(CB.Data.NonNull{`0},`0)">
+            <summary>
+            True if a and b are equal.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NonNull`1.op_Inequality(CB.Data.NonNull{`0},`0)">
+            <summary>
+            True if a and b are different.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NonNull`1.Equals(System.Object)">
+            <summary>
+            True if this is equal to the other.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NonNull`1.GetHashCode">
+            <summary>
+            Gets the hash code of the value.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NonNull`1.ToString">
+            <summary>
+            Returns a string that represents the value.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NonNull`1.op_Implicit(`0)~CB.Data.NonNull{`0}">
+            <summary>
+            Transtype an original reference to a non-null reference.
+            </summary>
+            <param name="value"></param>
+            <exception cref="T:System.ArgumentNullException">The value is a null reference.</exception>
+        </member>
+        <member name="M:CB.Data.NonNull`1.op_Implicit(CB.Data.NonNull{`0})~`0">
+            <summary>
+            Transtype the non-null reference to an original type reference.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:CB.Data.NonNull`1.Equals(CB.Data.NonNull{`0})">
+            <summary>
+            True if this reference/value equals the other one.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="P:CB.Data.NonNull`1.HasValue">
+            <summary>
+            True if a value is defined.
+            </summary>
+        </member>
+        <member name="M:CB.Data.NonNull`1.Equals(`0)">
+            <summary>
+            True if this value equals the other one.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Data.DefinedString">
+            <summary>
+            Certifies a string is always defined (non-null and non empty).
+            <para>
+            IMPORTANT:
+            Never initialize a blank structure, using default(NonEmpty).
+            And never let a NonEmpty in a field without initializing it with a reference.
+            </para>
+            </summary>
+        </member>
+        <member name="P:CB.Data.DefinedString.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">When trying to get an undefined value.</exception>
+            <exception cref="T:System.ArgumentNullException">When trying to set a null reference as the value.</exception>
+            <exception cref="T:System.ArgumentException">When trying to set String.Empty as the value.</exception>
+        </member>
+        <member name="M:CB.Data.DefinedString.#ctor(System.String)">
+            <summary>
+            Creates a defined string reference.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:CB.Data.DefinedString.op_Equality(CB.Data.DefinedString,CB.Data.DefinedString)">
+            <summary>
+            True is a == b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.DefinedString.op_Inequality(CB.Data.DefinedString,CB.Data.DefinedString)">
+            <summary>
+            True if a != b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.DefinedString.Equals(System.Object)">
+            <summary>
+            True if this value equals the given object.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.DefinedString.GetHashCode">
+            <summary>
+            Returns the hash code.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.DefinedString.ToString">
+            <summary>
+            Returns the value itself.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.DefinedString.op_Implicit(System.String)~CB.Data.DefinedString">
+            <summary>
+            Transtype a regular string to a DefinedString.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:CB.Data.DefinedString.op_Implicit(CB.Data.DefinedString)~System.String">
+            <summary>
+            Transtype a DefinedString to a regular string, in fact by extracting the value.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:CB.Data.DefinedString.Equals(CB.Data.DefinedString)">
+            <summary>
+            True if this == other.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="P:CB.Data.DefinedString.HasValue">
+            <summary>
+            True if a value is defined.
+            </summary>
+        </member>
+        <member name="M:CB.Data.DefinedString.Equals(System.String)">
+            <summary>
+            True if the value equals the other one.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Data.DefinedEnum`1">
+            <summary>
+            Certifies an enumeration value is always defined (is one of the declared values of the enumeration).
+            <para>
+            IMPORTANT:
+            Never initialize a blank structure, using default(DefinedEnum&lt;&gt;).
+            And never let a DefinedEnum&lt;&gt; in a field without initializing it with a value.
+            </para>
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:CB.Data.DefinedEnum`1.IsAFlagsEnumeration">
+            <summary>
+            True if this enumeration has the attribute <see cref="T:System.FlagsAttribute"/>.
+            </summary>
+        </member>
+        <member name="P:CB.Data.DefinedEnum`1.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">When trying to get the value of an uninitialized structure.</exception>
+            <exception cref="T:System.ArgumentException">When trying to set a value that is not explicitly declared in the enumeration.</exception>
+        </member>
+        <member name="M:CB.Data.DefinedEnum`1.#ctor(`0)">
+            <summary>
+            Creates a DefinedEnum using the given value.
+            </summary>
+            <param name="value"></param>
+            <exception cref="T:System.ArgumentException">When the value is not explicitly declared in the enumeration.</exception>
+        </member>
+        <member name="M:CB.Data.DefinedEnum`1.IsDefined(`0)">
+            <summary>
+            Checks the enumeration value is defined in its enumeration type.
+            <para>The value can be a multiple values combination if <typeparamref name="T"/> has FlagsAttribute.</para>
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.DefinedEnum`1.IsDeclaredAsAUniqueValue(`0)">
+            <summary>
+            Checks the enumeration value is one of the defined values in its enumeration type.
+            <para>The value can not be a multiple values combination, even if <typeparamref name="T"/> has FlagsAttribute.</para>
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.DefinedEnum`1.op_Equality(CB.Data.DefinedEnum{`0},CB.Data.DefinedEnum{`0})">
+            <summary>
+            True if a == b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.DefinedEnum`1.op_Inequality(CB.Data.DefinedEnum{`0},CB.Data.DefinedEnum{`0})">
+            <summary>
+            True if a != b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.DefinedEnum`1.Equals(System.Object)">
+            <summary>
+            True if this equals the other object.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.DefinedEnum`1.GetHashCode">
+            <summary>
+            Returns the hash code.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.DefinedEnum`1.ToString">
+            <summary>
+            Returns the fully qualified type name of the value.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.DefinedEnum`1.op_Implicit(`0)~CB.Data.DefinedEnum{`0}">
+            <summary>
+            Transtype an original value to a DefinedEnum.
+            </summary>
+            <param name="value"></param>
+            <exception cref="T:System.ArgumentException">When the <paramref name="value"/> is not explicitly declared in the enumeration.</exception>
+        </member>
+        <member name="M:CB.Data.DefinedEnum`1.op_Implicit(CB.Data.DefinedEnum{`0})~`0">
+            <summary>
+            Transtype a DefinedEnum to the original type by extracting its value.
+            </summary>
+            <param name="value"></param>
+            <exception cref="T:System.InvalidOperationException">If the structure is uninitialized.</exception>
+        </member>
+        <member name="M:CB.Data.DefinedEnum`1.Equals(CB.Data.DefinedEnum{`0})">
+            <summary>
+            True if this == other.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="P:CB.Data.DefinedEnum`1.HasValue">
+            <summary>
+            True if there is a defined value.
+            </summary>
+        </member>
+        <member name="M:CB.Data.DefinedEnum`1.Equals(`0)">
+            <summary>
+            True if this value equals the other.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Data.IBounded`1">
+            <summary>
+            A value from a bounded sequence.
+            <para>
+            <list type="bullet">
+            <item>The <see cref="P:CB.Data.IBounded`1.Value"/> must be greater, or equal depending on <see cref="P:CB.Data.IBounded`1.RangeIncludesTheMinimum"/>, to <see cref="P:CB.Data.IBounded`1.Minimum"/>.</item>
+            <item>The <see cref="P:CB.Data.IBounded`1.Value"/> must be lower, or equal depending on <see cref="P:CB.Data.IBounded`1.RangeIncludesTheMaximum"/>, to <see cref="P:CB.Data.IBounded`1.Maximum"/>.</item>
+            </list>
+            </para>
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:CB.Data.IBounded`1.Minimum">
+            <summary>
+            The minimum value is the lower bound of the range.
+            </summary>
+        </member>
+        <member name="P:CB.Data.IBounded`1.Maximum">
+            <summary>
+            The maximum value is the upper bound of the range.
+            </summary>
+        </member>
+        <member name="P:CB.Data.IBounded`1.RangeIncludesTheMinimum">
+            <summary>
+            True if the range includes the minimum value (the lower bound) itself.
+            </summary>
+        </member>
+        <member name="P:CB.Data.IBounded`1.RangeIncludesTheMaximum">
+            <summary>
+            True if the range includes the maximum value (the upper bound) itself.
+            </summary>
+        </member>
+        <member name="P:CB.Data.IBounded`1.Value">
+            <summary>
+            The value.
+            </summary>
+        </member>
+        <member name="T:CB.Data.Bounded`1">
+            <summary>
+            A value from a bounded sequence.
+            <para>Requirement #1 for sub-types: The range must be defined once by type. Two instances of the same type can't have different ranges.</para>
+            <para>Requirement #2 for sub-types: <see cref="P:CB.Data.Bounded`1.Minimum"/> and <see cref="P:CB.Data.Bounded`1.Maximum"/> must be non-null.</para>
+            <para>
+            <list type="bullet">
+            <item>The <see cref="P:CB.Data.Bounded`1.Value"/> must be greater, or equal depending on <see cref="P:CB.Data.Bounded`1.RangeIncludesTheMinimum"/>, to <see cref="P:CB.Data.Bounded`1.Minimum"/>.</item>
+            <item>The <see cref="P:CB.Data.Bounded`1.Value"/> must be lower, or equal depending on <see cref="P:CB.Data.Bounded`1.RangeIncludesTheMaximum"/>, to <see cref="P:CB.Data.Bounded`1.Maximum"/>.</item>
+            </list>
+            </para>
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:CB.Data.Bounded`1.Minimum">
+            <summary>
+            The minimum value is the lower bound of the range.
+            <para>Condition: The class must return a static value. Two instances of the same class can't have different ranges.
+            Example: <code>public T Minimum =&gt; 0;</code></para>
+            </summary>
+        </member>
+        <member name="P:CB.Data.Bounded`1.Maximum">
+            <summary>
+            The maximum value is the upper bound of the range.
+            <para>Condition: The class must return a static value. Two instances of the same class can't have different ranges.
+            Example: <code>public T Maximum =&gt; 100;</code></para>
+            </summary>
+        </member>
+        <member name="P:CB.Data.Bounded`1.RangeIncludesTheMinimum">
+            <summary>
+            True if the range includes the minimum value (the lower bound) itself.
+            <para>Condition: The class must return a static value. Two instances of the same class can't have different ranges.
+            Example: <code>public bool RangeIncludesTheMinimum =&gt; true;</code></para>
+            </summary>
+        </member>
+        <member name="P:CB.Data.Bounded`1.RangeIncludesTheMaximum">
+            <summary>
+            True if the range includes the maximum value (the upper bound) itself.
+            <para>Condition: The class must return a static value. Two instances of the same class can't have different ranges.
+            Example: <code>public bool RangeIncludesTheMaximum =&gt; true;</code></para>
+            </summary>
+        </member>
+        <member name="P:CB.Data.Bounded`1.Value">
+            <summary>
+            The value.
+            <para>This value is immutable, it is defined in the class constructor.</para>
+            </summary>
+        </member>
+        <member name="M:CB.Data.Bounded`1.#ctor(`0)">
+            <summary>
+            Creates a value.
+            </summary>
+            <param name="value"></param>
+            <exception cref="T:System.ArgumentOutOfRangeException">The value is not is the range.</exception>
+        </member>
+        <member name="M:CB.Data.Bounded`1.#ctor(`0,System.Boolean)">
+            <summary>
+            Private constructor that does not check the range.
+            </summary>
+            <param name="value"></param>
+            <param name="checkRange">Unused. Just to allow a second constructor (a matter of method signatures).</param>
+        </member>
+        <member name="M:CB.Data.Bounded`1.CreateASimpleRange(`0,`0,System.Boolean,System.Boolean)">
+            <summary>
+            Creates a simple range generator.
+            This generator in turn lets you create simple bounded values.
+            </summary>
+            <param name="minimum"></param>
+            <param name="maximum"></param>
+            <param name="rangeIncludesTheMinimum"></param>
+            <param name="rangeIncludesTheMaximum"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.Bounded`1.IsAValidValue(`0)">
+            <summary>
+            True if the given <paramref name="value"/> is in the range.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.Bounded`1.IsAValidValue(`0,`0,`0,System.Boolean,System.Boolean)">
+            <summary>
+            True if the given <paramref name="value"/> is in the range.
+            </summary>
+            <param name="value"></param>
+            <param name="minimum"></param>
+            <param name="maximum"></param>
+            <param name="rangeIncludesTheMinimum"></param>
+            <param name="rangeIncludesTheMaximum"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.Bounded`1.op_Equality(CB.Data.Bounded{`0},CB.Data.Bounded{`0})">
+            <summary>
+            Compare values.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.Bounded`1.op_Inequality(CB.Data.Bounded{`0},CB.Data.Bounded{`0})">
+            <summary>
+            Compare values.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.Bounded`1.op_Equality(CB.Data.Bounded{`0},`0)">
+            <summary>
+            Compare values.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.Bounded`1.op_Inequality(CB.Data.Bounded{`0},`0)">
+            <summary>
+            Compare values.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.Bounded`1.op_Implicit(CB.Data.Bounded{`0})~`0">
+            <summary>
+            Transtypes a bounded value to the original type by extracting the value itself.
+            </summary>
+            <param name="value"></param>
+            <exception cref="T:System.InvalidOperationException">If the value is undefined.</exception>
+        </member>
+        <member name="M:CB.Data.Bounded`1.ToString">
+            <summary>
+            Returns a string that represents the value. Or null if the value is null.
+            </summary>
+            <returns>The string that represents the value. Or null if the value is null.</returns>
+        </member>
+        <member name="M:CB.Data.Bounded`1.GetHashCode">
+            <summary>
+            Returns the hash code, or zero if the value is null.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.Bounded`1.Equals(System.Object)">
+            <summary>
+            Compare values.
+            <para>Ranges are not compared.</para>
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.Bounded`1.Equals(`0)">
+            <summary>
+            Compare values.
+            <para>Ranges are not compared.</para>
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.Bounded`1.CompareTo(CB.Data.Bounded{`0})">
+            <summary>
+            Compare this value to the other.
+            Then returns 0 is they are equal, -1 if this value is lower than the other, or +1 if this value is greater than the other.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException">The current value is null.</exception>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:CB.Data.Bounded`1.CompareTo(`0)">
+            <summary>
+            Compare this value to the other.
+            Then returns 0 is they are equal, -1 if this value is lower than the other, or +1 if this value is greater than the other.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException">The current value is null.</exception>
+        </member>
+        <member name="M:CB.Data.Bounded`1.Equals(CB.Data.Bounded{`0})">
+            <summary>
+            True if this value equals the other one.
+            False if one (or two) of the values is undefined.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Data.IRangeGenerator`1">
+            <summary>
+            A simple range generator.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:CB.Data.IRangeGenerator`1.IsAValidValue(`0)">
+            <summary>
+            True if the value is in the range.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.IRangeGenerator`1.NewValue(`0)">
+            <summary>
+            Creates a new bounded value.
+            </summary>
+            <param name="value"></param>
+            <returns>The value that is certified to be in the range.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">The value is not is the range.</exception>
+        </member>
+        <member name="M:CB.Data.IRangeGenerator`1.NewValueAsNonNull(`0)">
+            <summary>
+            Creates a new bounded value.
+            </summary>
+            <param name="value"></param>
+            <returns>The value that is certified to be in the range and to be non-null.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">The value is not is the range.</exception>
+        </member>
+        <member name="M:CB.Data.IRangeGenerator`1.TryCreateValue(`0)">
+            <summary>
+            Try to create a new bounded value.
+            </summary>
+            <param name="value"></param>
+            <returns>The value that is certified to be in the range, or null if the <paramref name="value"/> is not in the range.</returns>
+        </member>
+        <member name="T:CB.Data.ComparerAndOperators`1">
+            <summary>
+            Implements common comparisons for your class: (== , !=, &lt;, &lt;=, &gt;, &gt;=).
+            <para>
+            The inheriting class just need to implement Equals and CompareTo.</para>
+            <para>
+            Reminder: this.CompareTo(b) should return
+            0 when this==b,
+            -1 when this &lt; b and
+            1 when this &gt; b.
+            </para>
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:CB.Data.ComparerAndOperators`1.CompareTo(`0)">
+            <summary>
+            this.CompareTo(other) should return
+            0 when this==other,
+            -1 when this &lt; other and
+            1 when this &gt; other.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.ComparerAndOperators`1.Equals(`0)">
+            <summary>
+            Returns true if the given item is equal to this one.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.ComparerAndOperators`1.Compare(CB.Data.ComparerAndOperators{`0},CB.Data.ComparerAndOperators{`0})">
+            <summary>
+            Returns 
+            0 when x == y,
+            -1 when x &lt; y and
+            1 when x &gt; y.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.ComparerAndOperators`1.Equals(CB.Data.ComparerAndOperators{`0},CB.Data.ComparerAndOperators{`0})">
+            <summary>
+            Returns true if <paramref name="x"/> is equal to <paramref name="y"/>.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.ComparerAndOperators`1.GetHashCode(CB.Data.ComparerAndOperators{`0})">
+            <summary>
+            Returns the hash code of <paramref name="obj"/>.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.ComparerAndOperators`1.op_Equality(CB.Data.ComparerAndOperators{`0},CB.Data.ComparerAndOperators{`0})">
+            <summary>
+            Returns true if a == b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.ComparerAndOperators`1.op_Inequality(CB.Data.ComparerAndOperators{`0},CB.Data.ComparerAndOperators{`0})">
+            <summary>
+            Returns true if a != b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.ComparerAndOperators`1.op_GreaterThanOrEqual(CB.Data.ComparerAndOperators{`0},CB.Data.ComparerAndOperators{`0})">
+            <summary>
+            Returns true if a &gt;= b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.ComparerAndOperators`1.op_LessThanOrEqual(CB.Data.ComparerAndOperators{`0},CB.Data.ComparerAndOperators{`0})">
+            <summary>
+            Returns true if a &lt;= b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.ComparerAndOperators`1.op_GreaterThan(CB.Data.ComparerAndOperators{`0},CB.Data.ComparerAndOperators{`0})">
+            <summary>
+            Returns true if a &gt; b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.ComparerAndOperators`1.op_LessThan(CB.Data.ComparerAndOperators{`0},CB.Data.ComparerAndOperators{`0})">
+            <summary>
+            Returns true if a &lt; b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.ComparerAndOperators`1.GetHashCode">
+            <summary>
+            Returns the hash code.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.ComparerAndOperators`1.Equals(System.Object)">
+            <summary>
+            Returns true if <paramref name="obj"/> equals this instance.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.ComparerAndOperators`1.CompareTo(CB.Data.ComparerAndOperators{`0})">
+            <summary>
+            Returns 
+            0 when this == other,
+            -1 when this &lt; other and
+            1 when this &gt; other.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Data.EmptyArray`1">
+            <summary>
+            Gives an empty array of type T.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="F:CB.Data.EmptyArray`1.Empty">
+            <summary>
+            An empty array of type T.
+            <para>Which is a IList of T at the same time. Unlike a List of T, it cannot grow.</para>
+            </summary>
+        </member>
+        <member name="T:CB.Data.EnumHelper`1">
+            <summary>
+            Fast tests on Enum.
+            </summary>
+            <typeparam name="T">T must be an enumeration type.</typeparam>
+        </member>
+        <member name="F:CB.Data.EnumHelper`1.Values">
+            <summary>
+            All the declared values of this enumeration. The returned list is cached.
+            </summary>
+        </member>
+        <member name="F:CB.Data.EnumHelper`1.UnderlyingType">
+            <summary>
+            The real type that actually stores values.
+            By default, enumerations are stores as Int32.
+            </summary>
+        </member>
+        <member name="F:CB.Data.EnumHelper`1.UnderlyingTypeIs64Bits">
+            <summary>
+            True if the real storing type is Int64 or UInt64.
+            </summary>
+        </member>
+        <member name="F:CB.Data.EnumHelper`1.ValuesAsUInt64">
+            <summary>
+            If the real storing type is Int64 or UInt64, returns an array of all declared values. Otherwize, returns null.
+            </summary>
+        </member>
+        <member name="F:CB.Data.EnumHelper`1.ValuesAsUInt32">
+            <summary>
+            If the real storing type is not 64-bits, returns an array of all declared values. Otherwize, returns null.
+            </summary>
+        </member>
+        <member name="F:CB.Data.EnumHelper`1.HasFlagsAttribute">
+            <summary>
+            True is the enumeration can be treated as a bit field; that is, a set of flags.
+            </summary>
+        </member>
+        <member name="F:CB.Data.EnumHelper`1.Comparer">
+            <summary>
+            A class that can be used as a value comparer.
+            <para>This class implements <see cref="T:System.Collections.Generic.EqualityComparer`1"/>.</para>
+            </summary>
+        </member>
+        <member name="M:CB.Data.EnumHelper`1.Equal(`0,`0)">
+            <summary>
+            True if v1 is equal to v2.
+            </summary>
+            <param name="v1"></param>
+            <param name="v2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.EnumHelper`1.IsDefinedValue(`0)">
+            <summary>
+            Checks the enumeration value is defined in its enumeration type.
+            <para>The value can be a multiple values combination if <typeparamref name="T"/> has FlagsAttribute.</para>
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.EnumHelper`1.IsDeclaredAsAUniqueValue(`0)">
+            <summary>
+            Checks the enumeration value is one of the defined values in its enumeration type.
+            <para>The value can not be a multiple values combination, even if <typeparamref name="T"/> has FlagsAttribute.</para>
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Data.ImmutableDictionary`2">
+            <summary>
+            An immutable generic dictionary.
+            <para>This class is not a wrapper (unlike ReadOnlyDictionary&lt;K,V&gt;). The source items are copied and cannot be modified.</para>
+            <para>The class is thread-safe and concurrent.</para>
+            </summary>
+            <typeparam name="K">The key type.</typeparam>
+            <typeparam name="V">The value type.</typeparam>
+        </member>
+        <member name="P:CB.Data.ImmutableDictionary`2.AsReadWriteDictionary">
+            <summary>
+            Copies the data to a new (writable) dictionary.
+            </summary>
+        </member>
+        <member name="M:CB.Data.ImmutableDictionary`2.#ctor">
+            <summary>
+            Initializes an empty dictionary.
+            </summary>
+        </member>
+        <member name="M:CB.Data.ImmutableDictionary`2.#ctor(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{`0,`1}})">
+            <summary>
+            Builds a new dictionary, by copying the items of a collection.
+            </summary>
+            <param name="items">Original collection.</param>
+        </member>
+        <member name="M:CB.Data.ImmutableDictionary`2.#ctor(System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{`0,`1}},System.Collections.Generic.IEqualityComparer{`0})">
+            <summary>
+            Builds a new dictionary, by copying the items of a collection.
+            </summary>
+            <param name="items">Original collection.</param>
+            <param name="comparer">The equality comparison implementation to use when comparing keys.</param>
+        </member>
+        <member name="M:CB.Data.ImmutableDictionary`2.ContainsKey(`0)">
+            <summary>
+            Determines whether the dictionary contains the specified key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="P:CB.Data.ImmutableDictionary`2.Keys">
+            <summary>
+            Gets a collection containing the keys in the dictionary.
+            </summary>
+        </member>
+        <member name="M:CB.Data.ImmutableDictionary`2.TryGetValue(`0,`1@)">
+            <summary>
+            Attempts to get the value associated with the specified key from the dictionary.
+            </summary>
+            <param name="key"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="P:CB.Data.ImmutableDictionary`2.Values">
+            <summary>
+            Gets a collection that contains the values in the dictionary.
+            </summary>
+        </member>
+        <member name="P:CB.Data.ImmutableDictionary`2.Item(`0)">
+            <summary>
+            Gets the value associated with the specified key.
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="P:CB.Data.ImmutableDictionary`2.Count">
+            <summary>
+            Gets the number of key/value pairs contained in the dictionary.
+            </summary>
+        </member>
+        <member name="M:CB.Data.ImmutableDictionary`2.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the dictionary.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.ImmutableDictionary`2.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the dictionary.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Data.ImmutableList`1">
+            <summary>
+            An immutable generic collection.
+            <para>This class is not a wrapper (unlike ReadOnlyCollection&lt;T&gt;). The source items are copied and cannot be modified.</para>
+            <para>WARNING: The class is supposed to be thread-safe. Not tested yet.</para>
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:CB.Data.ImmutableList`1.AsArray">
+            <summary>
+            Builds a writable array by copying all items.
+            </summary>
+        </member>
+        <member name="P:CB.Data.ImmutableList`1.AsReadWriteList">
+            <summary>
+            Builds a writable list by copying all items.
+            </summary>
+        </member>
+        <member name="M:CB.Data.ImmutableList`1.#ctor">
+            <summary>
+            Initializes an empty list.
+            </summary>
+        </member>
+        <member name="M:CB.Data.ImmutableList`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Builds a list by copying a collection.
+            </summary>
+            <param name="items"></param>
+        </member>
+        <member name="M:CB.Data.ImmutableList`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.Collections.Generic.IEqualityComparer{`0})">
+            <summary>
+            Builds a list by copying a collection.
+            </summary>
+            <param name="items"></param>
+            <param name="comparer"></param>
+        </member>
+        <member name="P:CB.Data.ImmutableList`1.Count">
+            <summary>
+            Gets the number of items contained in the list.
+            </summary>
+        </member>
+        <member name="M:CB.Data.ImmutableList`1.Contains(`0)">
+            <summary>
+            Determines whether the list contains the specified value.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.ImmutableList`1.CopyTo(`0[],System.Int32)">
+            <summary>
+            Copies all the elements of the list to the specified one-dimensional array starting at the specified destination array index.
+            </summary>
+            <param name="array"></param>
+            <param name="index"></param>
+        </member>
+        <member name="M:CB.Data.ImmutableList`1.Clone">
+            <summary>
+            Creates a shallow copy of the list.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.ImmutableList`1.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the list.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.ImmutableList`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the list.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.ImmutableList`1.IndexOf(`0)">
+            <summary>
+            Searches for the specified value and returns the index of its first occurrence in the list.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="P:CB.Data.ImmutableList`1.Item(System.Int32)">
+            <summary>
+            Gets the element at the specified index.
+            </summary>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Data.NullableAny`1">
+            <summary>
+            A nullable value of type T where T can be a structure or a class, including primitive types.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:CB.Data.NullableAny`1.Undefined">
+            <summary>
+            A NullableAny where no value has been set.
+            </summary>
+        </member>
+        <member name="M:CB.Data.NullableAny`1.GetValueOrDefault">
+            <summary>
+            Gets the value. If the value is not defined, returns default(T).
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NullableAny`1.GetValueOrDefault(`0)">
+            <summary>
+            Gets the value. If the value is not defined, returns <paramref name="defaultValue"/>.
+            </summary>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="P:CB.Data.NullableAny`1.HasNoValue">
+            <summary>
+            Returns true if there is no value, or if the value is null.
+            </summary>
+        </member>
+        <member name="P:CB.Data.NullableAny`1.HasValue">
+            <summary>
+            Returns true if there is value, and if the value is not null.
+            </summary>
+        </member>
+        <member name="M:CB.Data.NullableAny`1.#ctor(`0)">
+            <summary>
+            Builds a structure with the given value.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="P:CB.Data.NullableAny`1.Value">
+            <summary>
+            Gets or sets the value.
+            <para>If a null value is set, HasValue will be set to false.</para>
+            <para>Please note 'set' is not thread-safe.</para>
+            </summary>
+            <exception cref="T:System.InvalidOperationException">(get) No value has been set, or the value has been set to null.</exception>
+        </member>
+        <member name="M:CB.Data.NullableAny`1.op_Equality(CB.Data.NullableAny{`0},CB.Data.NullableAny{`0})">
+            <summary>
+            True if a == b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NullableAny`1.op_Inequality(CB.Data.NullableAny{`0},CB.Data.NullableAny{`0})">
+            <summary>
+            True if a != b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NullableAny`1.op_LessThan(CB.Data.NullableAny{`0},CB.Data.NullableAny{`0})">
+            <summary>
+            True if a &lt; b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NullableAny`1.op_LessThanOrEqual(CB.Data.NullableAny{`0},CB.Data.NullableAny{`0})">
+            <summary>
+            True if a &lt;= b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NullableAny`1.op_GreaterThan(CB.Data.NullableAny{`0},CB.Data.NullableAny{`0})">
+            <summary>
+            True if a &gt; b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NullableAny`1.op_GreaterThanOrEqual(CB.Data.NullableAny{`0},CB.Data.NullableAny{`0})">
+            <summary>
+            True if a &gt;= b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NullableAny`1.CompareTo(`0)">
+            <summary>
+            Compare this value to the other.
+            Then returns 0 is they are equal, -1 if this value is lower than the other, or +1 if this value is greater than the other.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException">No value has been set, or the value has been set to null.</exception>
+        </member>
+        <member name="M:CB.Data.NullableAny`1.CompareTo(CB.Data.NullableAny{`0})">
+            <summary>
+            Compare this value to the other.
+            Then returns 0 is they are equal, -1 if this value is lower than the other, or +1 if this value is greater than the other.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NullableAny`1.Compare(CB.Data.NullableAny{`0},CB.Data.NullableAny{`0})">
+            <summary>
+            Compare x to y.
+            Then returns 0 is they are equal, -1 if x is lower than y, or +1 if x is greater than y.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NullableAny`1.Compare(`0,`0)">
+            <summary>
+            Compare x to y.
+            Then returns 0 is they are equal, -1 if x is lower than y, or +1 if x is greater than y.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NullableAny`1.Equals(CB.Data.NullableAny{`0})">
+            <summary>
+            True if this value equals the other value, or if both structures has no defined value.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NullableAny`1.Equals(`0)">
+            <summary>
+            True if this value equals the other value.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NullableAny`1.Equals(System.Object)">
+            <summary>
+            True if this value equals the other value, or if both structures has no defined value.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NullableAny`1.GetHashCode">
+            <summary>
+            Returns the value's hash code, or zero if no value is defined.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NullableAny`1.ToString">
+            <summary>
+            Returns the value's ToString(), or string.Empty if no value is defined.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NullableAny`1.op_Implicit(`0)~CB.Data.NullableAny{`0}">
+            <summary>
+            Transcodes T to NullableAny&lt;T&gt;.
+            </summary>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NullableAny`1.FromNullable``1(System.Nullable{``0})">
+            <summary>
+            Transcodes T? to NullableAny&lt;T&gt;.
+            </summary>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NullableAny`1.ToNullable``1(CB.Data.NullableAny{`0})">
+            <summary>
+            Transcodes NullableAny&lt;T&gt; to T?.
+            </summary>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NullableAny`1.op_Explicit(CB.Data.NullableAny{`0})~`0">
+            <summary>
+            Transcodes NullableAny&lt;T&gt; to T.
+            <para>The transcoder is explicit because if the source data has no value, an exception is thrown.</para>
+            </summary>
+            <param name="t"></param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException">No value has been set in the source, or the value has been set to null.</exception>
+        </member>
+        <member name="T:CB.Data.NullableAnyHelper">
+            <summary>
+            Type extensions for <see cref="T:CB.Data.NullableAny`1"/>
+            </summary>
+        </member>
+        <member name="M:CB.Data.NullableAnyHelper.ToNullableAny``1(System.Nullable{``0})">
+            <summary>
+            Transcodes T? to NullableAny&lt;T&gt;.
+            </summary>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.NullableAnyHelper.ToNullable``1(CB.Data.NullableAny{``0})">
+            <summary>
+            Transtypes NullableAny&lt;T&gt; to T?.
+            </summary>
+            <param name="v"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Data.IToString">
+            <summary>
+            To String transcoding functions.
+            <para>You have to include three additional static functions:
+            <code>public static <see cref="T:CB.Execution.Ret`1"/> ParseFromInvariantString(string s)</code>
+            and
+            <code>public static <see cref="T:CB.Execution.Ret`1"/> ParseFromString(string s)</code>
+            and
+            <code>public static <see cref="T:CB.Execution.Ret`1"/> ParseFromString(string s, IFormatProvider provider)</code>
+            </para>
+            </summary>
+        </member>
+        <member name="M:CB.Data.IToString.ToString(System.IFormatProvider)">
+            <summary>
+            Returns a string that represents the current object, using the given formatter.
+            </summary>
+            <param name="provider"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.IToString.ToInvariantString">
+            <summary>
+            Returns a string that represents the current object, using the invariant formatter.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Data.StringTranscoder">
+            <summary>
+            Optimized String-to-any-type transcoders.
+            <para>Please read <see cref="T:CB.Data.IToString"/>.</para>
+            </summary>
+        </member>
+        <member name="M:CB.Data.StringTranscoder.GetStringToTypeFunction``1">
+            <summary>
+            Returns the static function that parses a String then creates an instance of the given type T.
+            The signature of this function is <code></code>
+            <para>Please read <see cref="T:CB.Data.IToString"/>.</para>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.StringTranscoder.getStringToType``1">
+            <summary>
+            Returns null if no transcoding function was found.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.StringTranscoder.getTypeToString``1">
+            <summary>
+            Cherche fonctions ToString(IFormatProvider) et ToString().
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Data.StringTranscoder.GetTypeToStringFunction``1">
+            <summary>
+            Always returns a function, the default Object.ToString() at worst.
+            <para>Please read <see cref="T:CB.Data.IToString"/>.</para>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Execution.ReturnState">
+            <summary>
+            Return value state.
+            For <see cref="T:CB.Execution.Return`2"/> and for <see cref="T:CB.Execution.ReturnNonNull`2"/>.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnState.NotInitialized">
+            <summary>
+            The returned structure is not initialized at all.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnState.Value">
+            <summary>
+            The returned structure contains a valid value.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnState.Error">
+            <summary>
+            The returned structure contains an error code.
+            </summary>
+        </member>
+        <member name="T:CB.Execution.CorrespondingExceptionAttribute">
+            <summary>
+            Gives a correpondence between the error code and an Exception type.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.CorrespondingExceptionAttribute.ExceptionType">
+            <summary>
+            The Exception type that corresponds to the error code.
+            </summary>
+        </member>
+        <member name="M:CB.Execution.CorrespondingExceptionAttribute.#ctor(System.Type)">
+            <summary>
+            Gives a correpondence between the error code and an Exception type.
+            </summary>
+            <param name="exceptionType">The Exception type that corresponds to the error code.</param>
+        </member>
+        <member name="T:CB.Execution.ReturnSuccess">
+            <summary>
+            Common error code set for <see cref="T:CB.Execution.Return`2"/> and for <see cref="T:CB.Execution.ReturnNonNull`2"/>.
+            <para>Please note: if you need an Exception, your function should return a <see cref="T:CB.Execution.ReturnError"/>, not a <see cref="T:CB.Execution.ReturnSuccess"/>.</para>
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnSuccess.Reserved_NotInitialized">
+            <summary>
+            The function has a defect, it returns an uninitialized return entity.
+            <para>Please correct the function, or contact its author.</para>
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnSuccess.Success">
+            <summary>
+            The function is a success, a valid value is defined.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnSuccess.Fail">
+            <summary>
+            General failure.
+            <para>If you authored the function, please consider creating an error enumeration that will let the function return more specific error codes.</para>
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnSuccess.AlreadyExists">
+            <summary>
+            The thing to be created already exists.
+            Example: a file can not be overwritten.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnSuccess.ArgumentError">
+            <summary>
+            One of the arguments provided to a method is not valid.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnSuccess.ArgumentFormatError">
+            <summary>
+            The format of an argument is invalid, or a composite format string is not well formed.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnSuccess.ArgumentIsNull">
+            <summary>
+            A null reference (Nothing in Visual Basic) is passed to a method that does not accept it as a valid argument.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnSuccess.ArgumentOutOfRange">
+            <summary>
+            The value of an argument is outside the allowable range of values as defined by the invoked method.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnSuccess.ArgumentStringIsNullOrEmpty">
+            <summary>
+            The parameter, a string, is null or is String.Empty.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnSuccess.DirectoryNotFound">
+            <summary>
+            Part of a file or directory cannot be found.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnSuccess.FileNotFound">
+            <summary>
+            An attempt to access a file that does not exist on disk failed.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnSuccess.FormatError">
+            <summary>
+            The format of an argument is invalid, or a composite format string is not well formed.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnSuccess.InconsistentArgumentsError">
+            <summary>
+            The arguments are inconsistent. They no not match each other.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnSuccess.IOError">
+            <summary>
+            An I/O error occured.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnSuccess.NotFound">
+            <summary>
+            The requested value was not found.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnSuccess.NotSupported">
+            <summary>
+            An invoked method is not supported, or there is an attempt to read, seek, or write to a stream that does not support the invoked functionality.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnSuccess.Overflow">
+            <summary>
+            An arithmetic, casting, or conversion operation in a checked context resulted in an overflow.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnSuccess.PathTooLong">
+            <summary>
+            A path or file name is longer than the system-defined maximum length.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnSuccess.SecurityError">
+            <summary>
+            A security error is detected.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnSuccess.UnauthorizedAccess">
+            <summary>
+            The operating system denied access because of an I/O error or a specific type of security error.
+            </summary>
+        </member>
+        <member name="T:CB.Execution.ReturnCodesAttribute">
+            <summary>
+            All the enumeration error codes that a specific method can return.
+            <para>Codes need to be transcoded to Int32. The error enumeration itself must be based on Int32.</para>
+            <para>Success code (default(error enumeration)) is implicit, no use to add it to the list.</para>
+            <para>Please consult <see cref="T:CB.Execution.Return`2"/>, <see cref="T:CB.Execution.ReturnNonNull`2"/> or <see cref="T:CB.Execution.IReturn`2"/>.</para>
+            <example>
+            <code>
+            [ReturnCodesAttribute((int)MyReturnCode.NotHappy, (int)MyReturnCode.ArgumentIsUgly)]
+            </code>
+            </example>
+            Example:
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnCodesAttribute.Codes">
+            <summary>
+            The errors this method can cause.
+            <para>Every call should manage all these potential errors.</para>
+            </summary>
+        </member>
+        <member name="M:CB.Execution.ReturnCodesAttribute.#ctor(System.Int32[])">
+            <summary>
+            Possible error codes, transcoded to Int32.
+            <para>Success code (default(error enumeration)) is implicit, no use to add it to the list.</para>
+            </summary>
+            <param name="codes"></param>
+        </member>
+        <member name="T:CB.Execution.ReturnSuccessCodesAttribute">
+            <summary>
+            All ReturnSuccess codes that a specific method can return.
+            <para>Success code (<see cref="F:CB.Execution.ReturnSuccess.Success"/>) is implicit, no use to add it to the list.</para>
+            <para>Please consult <see cref="T:CB.Execution.Ret`1"/>, <see cref="T:CB.Execution.RetNonNull`1"/>, or <see cref="T:CB.Execution.IReturn`1"/>.</para>
+            <example>
+            Example:
+            <code>
+            [ReturnSuccessCodes(ReturnSuccess.FormatError, ReturnSuccess.ArgumentIsNull)]
+            </code>
+            </example>
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnSuccessCodesAttribute.Codes">
+            <summary>
+            The errors this method can cause.
+            <para>Success code (<see cref="F:CB.Execution.ReturnSuccess.Success"/>) is implicit.</para>
+            <para>Every call should manage all these potential errors.</para>
+            </summary>
+        </member>
+        <member name="M:CB.Execution.ReturnSuccessCodesAttribute.#ctor(CB.Execution.ReturnSuccess[])">
+            <summary>
+            Possible error codes.
+            <para>Success code (<see cref="F:CB.Execution.ReturnSuccess.Success"/>) is implicit, no use to add it to the list.</para>
+            </summary>
+            <param name="codes"></param>
+        </member>
+        <member name="T:CB.Execution.IReturn">
+            <summary>
+            The base interface for the return structures.
+            </summary>
+        </member>
+        <member name="T:CB.Execution.IReturn`2">
+            <summary>
+            Return type interface to let return a value and an error code at the same time.
+            <para>Note: a function that returns a IReturn type should set <see cref="T:CB.Execution.ReturnCodesAttribute"/>.</para>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <typeparam name="E">E must be an enumeration based on Int32.</typeparam>
+        </member>
+        <member name="P:CB.Execution.IReturn`2.HasValue">
+            <summary>
+            True if contains a valid value.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.IReturn`2.HasErrorCode">
+            <summary>
+            True if contains an error code.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.IReturn`2.State">
+            <summary>
+            The structure can be uninitialized, can has a value, or can contain an error code.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.IReturn`2.ErrorCode">
+            <summary>
+            The error code.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.IReturn`2.ErrorCodeAsInt32">
+            <summary>
+            The error code, transtyped as a Int32.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.IReturn`2.Value">
+            <summary>
+            The value.
+            </summary>
+        </member>
+        <member name="M:CB.Execution.IReturn`2.GetValueOrDefault">
+            <summary>
+            Returns the valid value or default(T).
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.IReturn`2.GetValueOrDefault(`0)">
+            <summary>
+            Returns the valid value or <paramref name="defaultValue"/>.
+            </summary>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Execution.IReturn`1">
+            <summary>
+            Return type interface to let return a value and a <see cref="T:CB.Execution.ReturnSuccess"/> code at the same time.
+            <para>Note: a function that returns a IReturn type should set <see cref="T:CB.Execution.ReturnSuccessCodesAttribute"/>.</para>
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:CB.Execution.ReturnError">
+            <summary>
+            An error built from a <see cref="T:CB.Execution.ReturnSuccess"/> and an <see cref="T:System.Exception"/>.
+            <para>Please note: if you do not need an Exception, your function should return a simple <see cref="T:CB.Execution.ReturnSuccess"/>, not a <see cref="T:CB.Execution.ReturnError"/>.</para>
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnError.ErrorCode">
+            <summary>
+            The error code.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnError.Exception">
+            <summary>
+            The exception.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnError.CorrespondenceErrorToException">
+            <summary>
+            A dictionary that matches error codes and exceptions.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnError.CorrespondenceExceptionToError">
+            <summary>
+            A dictionary that matches exceptions and error codes.
+            </summary>
+        </member>
+        <member name="F:CB.Execution.ReturnError.Success">
+            <summary>
+            No error, just a success.
+            </summary>
+        </member>
+        <member name="M:CB.Execution.ReturnError.#ctor(CB.Execution.ReturnSuccess,System.Exception)">
+            <summary>
+            <para>Only a framework exception should be passed here, you may not instanciate an exception.</para>
+            </summary>
+            <param name="errorCode"></param>
+            <param name="exception"></param>
+        </member>
+        <member name="M:CB.Execution.ReturnError.#ctor(CB.Execution.ReturnSuccess)">
+            <summary>
+            Returns a simple ReturnSuccess error code, with no Exceotion.
+            </summary>
+            <param name="errorCode"></param>
+        </member>
+        <member name="M:CB.Execution.ReturnError.#ctor(System.Exception)">
+            <summary>
+            Tries to find the meeting ReturnSuccess error code.
+            <para>If no error code corresponds, returns ReturnSuccess.Fail.</para>
+            <para>Only a framework exception should be passed here, you may not instanciate an exception.</para>
+            </summary>
+            <param name="exception"></param>
+        </member>
+        <member name="M:CB.Execution.ReturnError.#ctor(System.Exception,System.Boolean)">
+            <summary>
+            Tries to find the meeting ReturnSuccess error code.
+            <para>If no error code corresponds, throws the exception, or returns ReturnSuccess.Fail, depending on <paramref name="throwsIfNoCorrespondence"/>.</para>
+            <para>Only a framework exception should be passed here, you may not instanciate an exception.</para>
+            </summary>
+            <param name="exception"></param>
+            <param name="throwsIfNoCorrespondence">If true and if no error code corresponds, throws the exception.</param>
+        </member>
+        <member name="M:CB.Execution.ReturnError.ExceptionTypeOfError(CB.Execution.ReturnSuccess)">
+            <summary>
+            Returns the Exception error code that correpond to the given ReturnSuccess.
+            <para>If no exception corresponds, returns null.</para>
+            </summary>
+            <param name="error"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.ReturnError.ErrorOfException(System.Exception)">
+            <summary>
+            Returns the ReturnSuccess error code that correpond to the given Exception.
+            <para>If no error corresponds, throws the Exception.</para>
+            </summary>
+            <param name="exception"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.ReturnError.ErrorOfExceptionOrDefault(System.Exception)">
+            <summary>
+            Returns the ReturnSuccess error code that correpond to the given Exception.
+            <para>If no error corresponds, returns ReturnSuccess.Fail.</para>
+            </summary>
+            <param name="exception"></param>
+            <returns></returns>
+        </member>
+        <member name="P:CB.Execution.ReturnError.IsASuccess">
+            <summary>
+            True if the function call was a success.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.ReturnError.IsAnError">
+            <summary>
+            True if the function call was a failure.
+            </summary>
+        </member>
+        <member name="M:CB.Execution.ReturnError.LogsIfError">
+            <summary>
+            Writes the error to the (IDE's) errors log.
+            </summary>
+        </member>
+        <member name="M:CB.Execution.ReturnError.ToString">
+            <summary>
+            The exception message, or the error code name.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.ErrorCodesEnumHelper`1.checkTypeE(`0)">
+            <summary>
+            Effectue des vérifications sur le type E.
+            Le paramètre est juste renvoyé en sortie, de façon à être une fonction transparente.
+            </summary>
+            <param name="code"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Execution.Return`2">
+            <summary>
+            A return value or an-error-code/enumeration.
+            <para>The function should set <see cref="T:CB.Execution.ReturnCodesAttribute"/>.</para>
+            </summary>
+            <typeparam name="T">Value type.</typeparam>
+            <typeparam name="E">Error code enumeration type, where NotInitialized = 0 and Success = 1.</typeparam>
+        </member>
+        <member name="P:CB.Execution.Return`2.ErrorCode">
+            <summary>
+            The error code.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.Return`2.State">
+            <summary>
+            The state: NotInitialized, Success or Error.
+            </summary>
+        </member>
+        <member name="M:CB.Execution.Return`2.#ctor(`0)">
+            <summary>
+            Initialises with a valid return value.
+            Null is seen as a valid value, not an error.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:CB.Execution.Return`2.#ctor(`1)">
+            <summary>
+            Initialises with an error code.
+            </summary>
+            <param name="errorCode"></param>
+        </member>
+        <member name="P:CB.Execution.Return`2.HasValue">
+            <summary>
+            True if there is a valid value.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.Return`2.HasErrorCode">
+            <summary>
+            True if there is a code error.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.Return`2.Value">
+            <summary>
+            Returns a valid value, or throws an exception
+            </summary>
+            <exception cref="T:System.InvalidOperationException">The structure is not initialized, or there is an error code.</exception>
+        </member>
+        <member name="M:CB.Execution.Return`2.op_Equality(CB.Execution.Return{`0,`1},CB.Execution.Return{`0,`1})">
+            <summary>
+            True if a == b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.Return`2.op_Inequality(CB.Execution.Return{`0,`1},CB.Execution.Return{`0,`1})">
+            <summary>
+            True if a  != b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.Return`2.GetValueOrDefault">
+            <summary>
+            Returns the valid value, or default(T).
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.Return`2.GetValueOrDefault(`0)">
+            <summary>
+            Returns the valid value, or <paramref name="defaultValue"/>.
+            </summary>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.Return`2.Equals(System.Object)">
+            <summary>
+            True if this equals the <paramref name="other"/> object.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.Return`2.GetHashCode">
+            <summary>
+            Returns the hash code.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.Return`2.ToString">
+            <summary>
+            Returns either "&lt;not initialized&gt;", or the valid value.ToString(), or "&lt;error: xxxx&gt;".
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.Return`2.op_Implicit(`0)~CB.Execution.Return{`0,`1}">
+            <summary>
+            Transtypes an original value to a return structure.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:CB.Execution.Return`2.op_Explicit(CB.Execution.Return{`0,`1})~`0">
+            <summary>
+            Transtypes a return structure to a value.
+            </summary>
+            <param name="value"></param>
+            <exception cref="T:System.InvalidOperationException">The structure is not initialized, or there is an error code.</exception>
+        </member>
+        <member name="M:CB.Execution.Return`2.Equals(CB.Execution.Return{`0,`1})">
+            <summary>
+            True if this == <paramref name="other"/>.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="P:CB.Execution.Return`2.ErrorCodeAsInt32">
+            <summary>
+            Gets the error code transtyped to a Int32.
+            </summary>
+        </member>
+        <member name="T:CB.Execution.ReturnNonNull`2">
+            <summary>
+            A return value or an-error-code/enumeration.
+            <para>The function should set <see cref="T:CB.Execution.ReturnCodesAttribute"/>.</para>
+            <example>
+            Example:
+            <code>[ReturnCodes((int)MyErrorCodes.StringIsEmpty, (int)MyErrorCodes.StringIsNull)]</code>
+            </example>
+            </summary>
+            <typeparam name="T">Value type.</typeparam>
+            <typeparam name="E">Error code enumeration type, where NotInitialized = 0 and Success = 1.</typeparam>
+        </member>
+        <member name="P:CB.Execution.ReturnNonNull`2.ErrorCode">
+            <summary>
+            The error code.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.ReturnNonNull`2.State">
+            <summary>
+            The state: NotInitialized, Success or Error.
+            </summary>
+        </member>
+        <member name="M:CB.Execution.ReturnNonNull`2.#ctor(`0)">
+            <summary>
+            Initialises with a valid return value.
+            </summary>
+            <param name="value">Can not be null.</param>
+        </member>
+        <member name="M:CB.Execution.ReturnNonNull`2.#ctor(`1)">
+            <summary>
+            Initialises with an error code.
+            </summary>
+            <param name="errorCode"></param>
+        </member>
+        <member name="P:CB.Execution.ReturnNonNull`2.HasValue">
+            <summary>
+            True if there is a valid value.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.ReturnNonNull`2.HasErrorCode">
+            <summary>
+            True if there is an error code.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.ReturnNonNull`2.Value">
+            <summary>
+            Returns a valid value, or throws an exception
+            </summary>
+        </member>
+        <member name="M:CB.Execution.ReturnNonNull`2.op_Equality(CB.Execution.ReturnNonNull{`0,`1},CB.Execution.ReturnNonNull{`0,`1})">
+            <summary>
+            True if a == b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.ReturnNonNull`2.op_Inequality(CB.Execution.ReturnNonNull{`0,`1},CB.Execution.ReturnNonNull{`0,`1})">
+            <summary>
+            True if a != b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.ReturnNonNull`2.GetValueOrDefault">
+            <summary>
+            Returns the valid value, or default(T).
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.ReturnNonNull`2.GetValueOrDefault(`0)">
+            <summary>
+            Returns the valid value, or <paramref name="defaultValue"/>.
+            </summary>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.ReturnNonNull`2.Equals(System.Object)">
+            <summary>
+            True if this equals the <paramref name="other"/> object.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.ReturnNonNull`2.GetHashCode">
+            <summary>
+            Returns the hash code.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.ReturnNonNull`2.ToString">
+            <summary>
+            Returns either "&lt;not initialized&gt;", or the valid value.ToString(), or "&lt;error: xxxx&gt;".
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.ReturnNonNull`2.op_Implicit(`0)~CB.Execution.ReturnNonNull{`0,`1}">
+            <summary>
+            Transtypes an original value to a return structure.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:CB.Execution.ReturnNonNull`2.op_Implicit(CB.Execution.ReturnNonNull{`0,`1})~`0">
+            <summary>
+            Transtypes a return structure to a value.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:CB.Execution.ReturnNonNull`2.Equals(CB.Execution.ReturnNonNull{`0,`1})">
+            <summary>
+            True if this == <paramref name="other"/>.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="P:CB.Execution.ReturnNonNull`2.ErrorCodeAsInt32">
+            <summary>
+            Gets the error code transtyped to a Int32.
+            </summary>
+        </member>
+        <member name="T:CB.Execution.Ret`1">
+            <summary>
+            Ret&lt;T&gt; is equivalent to Return&lt;T, <see cref="T:ReturnSuccess"/>&gt;.
+            <para>The function should set <see cref="T:CB.Execution.ReturnSuccessCodesAttribute"/>.</para>
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:CB.Execution.Ret`1.State">
+            <summary>
+            The current state: NotInitialized, Success or Error.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.Ret`1.ErrorCode">
+            <summary>
+            The error code.
+            </summary>
+        </member>
+        <member name="M:CB.Execution.Ret`1.#ctor(`0)">
+            <summary>
+            Initialises with a valid return value.
+            <para>Null is seen as a valid value, not an error.</para>
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:CB.Execution.Ret`1.#ctor(CB.Execution.ReturnSuccess)">
+            <summary>
+            Initialises with an error code.
+            </summary>
+            <param name="errorCode"></param>
+            <exception cref="T:System.ArgumentException">Given error code is a success code. This constructor needs an error code.</exception>
+        </member>
+        <member name="P:CB.Execution.Ret`1.HasValue">
+            <summary>
+            True if there is a valid value.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.Ret`1.HasErrorCode">
+            <summary>
+            True if there is a code error.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.Ret`1.IsInitialized">
+            <summary>
+            True if the structure is initialized.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.Ret`1.Value">
+            <summary>
+            Returns a valid value, or throws an exception.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">Not initialized. No parameter constructor was called.</exception>
+        </member>
+        <member name="M:CB.Execution.Ret`1.op_Equality(CB.Execution.Ret{`0},CB.Execution.Ret{`0})">
+            <summary>
+            True if a == b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.Ret`1.op_Inequality(CB.Execution.Ret{`0},CB.Execution.Ret{`0})">
+            <summary>
+            True if a != b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.Ret`1.GetValueOrDefault">
+            <summary>
+            Returns the valid value, or default(T).
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.Ret`1.GetValueOrDefault(`0)">
+            <summary>
+            Returns the valid value, or <paramref name="defaultValue"/>.
+            </summary>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.Ret`1.Equals(System.Object)">
+            <summary>
+            True if this equals the <paramref name="other"/> object.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.Ret`1.GetHashCode">
+            <summary>
+            Returns the hash code.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.Ret`1.ToString">
+            <summary>
+            Returns either "&lt;not initialized&gt;", or the valid value.ToString(), or "&lt;error: xxxx&gt;".
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.Ret`1.op_Implicit(`0)~CB.Execution.Ret{`0}">
+            <summary>
+            Creates a Ret&lt;T&gt; from a value.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:CB.Execution.Ret`1.op_Explicit(CB.Execution.Ret{`0})~`0">
+            <summary>
+            Transcodes to the value.
+            </summary>
+            <param name="value"></param>
+            <exception cref="T:System.InvalidOperationException">Not initialized. No parameter constructor was called.</exception>
+        </member>
+        <member name="M:CB.Execution.Ret`1.op_Implicit(CB.Execution.ReturnSuccess)~CB.Execution.Ret{`0}">
+            <summary>
+            Creates a Ret&lt;T&gt; from a ReturnSuccess.
+            </summary>
+            <param name="errorCode"></param>
+        </member>
+        <member name="M:CB.Execution.Ret`1.Equals(CB.Execution.Ret{`0})">
+            <summary>
+            True if this == <paramref name="other"/>.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="P:CB.Execution.Ret`1.ErrorCodeAsInt32">
+            <summary>
+            Gets the error code transtyped to a Int32.
+            </summary>
+        </member>
+        <member name="T:CB.Execution.RetNonNull`1">
+            <summary>
+            The function returns a value or an error, not a null.
+            <para>RetNonNull&lt;T&gt; is equivalent to ReturnNonNull&lt;T, ReturnSuccess&gt;.</para>
+            <para>The function should set <see cref="T:CB.Execution.ReturnSuccessCodesAttribute"/>.</para>
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:CB.Execution.RetNonNull`1.ErrorCode">
+            <summary>
+            The error code.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.RetNonNull`1.State">
+            <summary>
+            The state: NotInitialized, Success or Error.
+            </summary>
+        </member>
+        <member name="M:CB.Execution.RetNonNull`1.#ctor(`0)">
+            <summary>
+            Initialises with a valid return value.
+            </summary>
+            <param name="value">Can not be null.</param>
+            <exception cref="T:System.ArgumentNullException">value is null</exception>
+        </member>
+        <member name="M:CB.Execution.RetNonNull`1.#ctor(CB.Execution.ReturnSuccess)">
+            <summary>
+            Initialises with an error code.
+            </summary>
+            <param name="errorCode"></param>
+        </member>
+        <member name="P:CB.Execution.RetNonNull`1.HasValue">
+            <summary>
+            True if there is a valid value.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.RetNonNull`1.HasErrorCode">
+            <summary>
+            True if there is a code error.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.RetNonNull`1.IsInitialized">
+            <summary>
+            True if the structure is initialized.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.RetNonNull`1.Value">
+            <summary>
+            Returns a valid value, or throws an exception
+            </summary>
+            <exception cref="T:System.InvalidOperationException">The structure is uninitialized, or it contains an error code.</exception>
+        </member>
+        <member name="M:CB.Execution.RetNonNull`1.op_Equality(CB.Execution.RetNonNull{`0},CB.Execution.RetNonNull{`0})">
+            <summary>
+            True if a == b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.RetNonNull`1.op_Inequality(CB.Execution.RetNonNull{`0},CB.Execution.RetNonNull{`0})">
+            <summary>
+            True if a != b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.RetNonNull`1.op_Implicit(`0)~CB.Execution.RetNonNull{`0}">
+            <summary>
+            Creates a RetNonNull&lt;T&gt; from a value.
+            </summary>
+            <param name="value"></param>
+            <exception cref="T:System.ArgumentNullException">value is null</exception>
+        </member>
+        <member name="M:CB.Execution.RetNonNull`1.op_Explicit(CB.Execution.RetNonNull{`0})~`0">
+            <summary>
+            Transcodes to the value.
+            </summary>
+            <param name="value"></param>
+            <exception cref="T:System.InvalidOperationException">Not initialized. No parameter constructor was called.</exception>
+        </member>
+        <member name="M:CB.Execution.RetNonNull`1.op_Implicit(CB.Execution.ReturnSuccess)~CB.Execution.RetNonNull{`0}">
+            <summary>
+            Creates a RetNonNull&lt;T&gt; from a ReturnSuccess.
+            </summary>
+            <param name="errorCode"></param>
+        </member>
+        <member name="M:CB.Execution.RetNonNull`1.GetValueOrDefault">
+            <summary>
+            Returns the valid value, or default(T).
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.RetNonNull`1.GetValueOrDefault(`0)">
+            <summary>
+            Returns the valid value, or <paramref name="defaultValue"/>.
+            </summary>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.RetNonNull`1.Equals(System.Object)">
+            <summary>
+            True if this equals the <paramref name="other"/> object.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.RetNonNull`1.GetHashCode">
+            <summary>
+            Returns the hash code.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.RetNonNull`1.ToString">
+            <summary>
+            Returns either "&lt;not initialized&gt;", or the valid value.ToString(), or "&lt;error: xxxx&gt;".
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.RetNonNull`1.Equals(CB.Execution.RetNonNull{`0})">
+            <summary>
+            True if this == <paramref name="other"/>.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="P:CB.Execution.RetNonNull`1.ErrorCodeAsInt32">
+            <summary>
+            Gets the error code transtyped to a Int32.
+            </summary>
+        </member>
+        <member name="T:CB.Execution.RetNonNullDisposable`1">
+            <summary>
+            Returns a disposable value or an error, not a null.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:CB.Execution.RetNonNullDisposable`1.#ctor(`0)">
+            <summary>
+            Initialises with a valid return value.
+            Null is an invalid value.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:CB.Execution.RetNonNullDisposable`1.#ctor(CB.Execution.ReturnSuccess)">
+            <summary>
+            Initialises with an error code.
+            </summary>
+            <param name="errorCode"></param>
+        </member>
+        <member name="P:CB.Execution.RetNonNullDisposable`1.HasValue">
+            <summary>
+            True if there is a valid value.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.RetNonNullDisposable`1.HasErrorCode">
+            <summary>
+            True if there is a code error.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.RetNonNullDisposable`1.State">
+            <summary>
+            The state: NotInitialized, Success or Error.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.RetNonNullDisposable`1.ErrorCode">
+            <summary>
+            The error code.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.RetNonNullDisposable`1.ErrorCodeAsInt32">
+            <summary>
+            Gets the error code transtyped to a Int32.
+            </summary>
+        </member>
+        <member name="P:CB.Execution.RetNonNullDisposable`1.Value">
+            <summary>
+            Returns a valid value, or throws an exception
+            </summary>
+            <exception cref="T:System.InvalidOperationException">The structure is uninitialized, or it contains an error code.</exception>
+        </member>
+        <member name="M:CB.Execution.RetNonNullDisposable`1.GetValueOrDefault">
+            <summary>
+            Returns the valid value, or default(T).
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.RetNonNullDisposable`1.GetValueOrDefault(`0)">
+            <summary>
+            Returns the valid value, or <paramref name="defaultValue"/>.
+            </summary>
+            <param name="defaultValue"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.RetNonNullDisposable`1.Dispose">
+            <summary>
+            IDisposable.Dispose().
+            </summary>
+        </member>
+        <member name="M:CB.Execution.RetNonNullDisposable`1.GetHashCode">
+            <summary>
+            Returns the hash code.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.RetNonNullDisposable`1.Equals(System.Object)">
+            <summary>
+            True if this equals the <paramref name="obj"/> object.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Execution.RetNonNullDisposable`1.ToString">
+            <summary>
+            Returns either "&lt;not initialized&gt;", or the valid value.ToString(), or "&lt;error: xxxx&gt;".
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Files.ExistingDirectory">
+            <summary>
+            Represents an existing directory (at the time of instanciation).
+            </summary>
+        </member>
+        <member name="F:CB.Files.ExistingDirectory.OriginalDirectory">
+            <summary>
+            The directory that was given as the class constructor parameter.
+            </summary>
+        </member>
+        <member name="F:CB.Files.ExistingDirectory.FullPath">
+            <summary>
+            The full path, determined at the moment of the class construction.
+            </summary>
+        </member>
+        <member name="P:CB.Files.ExistingDirectory.StillExists">
+            <summary>
+            True if the file still exists, now.
+            </summary>
+        </member>
+        <member name="M:CB.Files.ExistingDirectory.#ctor(System.String)">
+            <summary>
+            Creates an instance from an existing directory.
+            <para>Various exceptions can occur. If you need an exception-less creation, please use the static function <see cref="M:CB.Files.ExistingDirectory.GetDirectory(System.String)"/>.</para>
+            <para>The FullPath is determined now and will stay constant.</para>
+            </summary>
+            <param name="directory"></param>
+            <exception cref="T:System.IO.DriveNotFoundException"></exception>
+            <exception cref="T:System.IO.DirectoryNotFoundException"></exception>
+        </member>
+        <member name="M:CB.Files.ExistingDirectory.GetDirectory(System.String)">
+            <summary>
+            Creates an ExistingDirectory. Or returns null in case of a problem (the directory does not exist, or is not accessible, or its full path can not be determined, or the parameter was null or empty, or any other reason.
+            <para>It does not throw exceptions. If you need exceptions, please use <see cref="M:CB.Files.ExistingDirectory.#ctor(System.String)">the constructor</see>.</para>
+            </summary>
+            <param name="directory"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Files.ExistingDirectory.op_Implicit(System.String)~CB.Files.ExistingDirectory">
+            <summary>
+            Instances an existing directory.
+            <para>If you need an error code constructor, please use <see cref="M:CB.Files.ExistingDirectory.GetDirectory(System.String)"/></para>
+            </summary>
+            <param name="temp"></param>
+        </member>
+        <member name="M:CB.Files.ExistingDirectory.op_Explicit(CB.Files.ExistingDirectory)~System.String">
+            <summary>
+            Returns the full path.
+            </summary>
+            <param name="c"></param>
+        </member>
+        <member name="M:CB.Files.ExistingDirectory.op_Equality(CB.Files.ExistingDirectory,CB.Files.ExistingDirectory)">
+            <summary>
+            True if a == b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Files.ExistingDirectory.op_Inequality(CB.Files.ExistingDirectory,CB.Files.ExistingDirectory)">
+            <summary>
+            True if a != b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Files.ExistingDirectory.Equals(System.Object)">
+            <summary>
+            True if this equals the <paramref name="obj"/>.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Files.ExistingDirectory.GetHashCode">
+            <summary>
+            Returns hash code.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Files.ExistingDirectory.ToString">
+            <summary>
+            Returns a string that represents the directory.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Files.FileEx">
+            <summary>
+            Helpers functions for files.
+            </summary>
+        </member>
+        <member name="M:CB.Files.FileEx.IsValidFileName(System.String)">
+            <summary>
+            Checks the syntax validity as a file name.
+            <para>It does not check the file existence.</para>
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="F:CB.Files.FileEx.PathComparer">
+            <summary>
+            A portable comparer for file-system paths.
+            <para>On Linux and macOS, the comparer takes letter case into account. On Windows, it ignores letter case.</para>
+            <para>Starting and ending spaces, and quotation marks are removed before comparison.</para>
+            <para>Relative paths are not resolved.</para>
+            <para>Path syntax and existence are not checked.</para>
+            </summary>
+        </member>
+        <member name="F:CB.Files.FileEx.FileNameComparer">
+            <summary>
+            A portable comparer for pure file names. Paths are ignored.
+            <para>On Linux and macOS, the comparer takes letter case into account. On Windows, it ignores letter case.</para>
+            <para>Starting and ending spaces, and quotation marks are removed before comparison.</para>
+            <para>Relative paths are not resolved.</para>
+            <para>Path syntax and existence are not checked.</para>
+            </summary>
+        </member>
+        <member name="M:CB.Files.FileEx.RemoveFiles(System.Collections.Generic.IList{System.String},System.Collections.Generic.ICollection{System.String},System.Boolean)">
+            <summary>
+            Removes from the first file list the files that are in the second file list.
+            </summary>
+            <param name="files">The first list. It will be modified</param>
+            <param name="otherFiles">The second list.</param>
+            <param name="ignorePath">If true, the file names are compared, ignoring the file paths.</param>
+            <returns>The number of removed files.</returns>
+        </member>
+        <member name="T:CB.Files.FileEx.PortableFileNameComparer">
+            <summary>
+            Compares file names, but ignore their path.
+            </summary>
+        </member>
+        <member name="T:CB.Files.IniParser">
+            <summary>
+            Manages INI files for settings.
+            <para>Please note this class is *not* thread-safe at the moment.</para>
+            </summary>
+        </member>
+        <member name="F:CB.Files.IniParser.settings">
+            <summary>
+            All settings. Key is {section name, setting name}. Value is setting value.
+            </summary>
+        </member>
+        <member name="F:CB.Files.IniParser.IgnoreCase">
+            <summary>
+            Ignores characters' upper/lower case.
+            </summary>
+        </member>
+        <member name="F:CB.Files.IniParser.NameComparer">
+            <summary>
+            Comparer for section and setting names.
+            </summary>
+        </member>
+        <member name="T:CB.Files.IniParser.SectionPair">
+            <summary>
+            Section name and setting name.
+            Note: does not contain the setting value (it is in <see cref="F:CB.Files.IniParser.settings"/>).
+            </summary>
+        </member>
+        <member name="F:CB.Files.IniParser.SectionPair.SectionName">
+            <summary>
+            The section name.
+            </summary>
+        </member>
+        <member name="F:CB.Files.IniParser.SectionPair.SettingName">
+            <summary>
+            The setting name.
+            </summary>
+        </member>
+        <member name="T:CB.Files.IniParser.SectionPairNameComparer">
+            <summary>
+            Compares section names and setting names.
+            </summary>
+        </member>
+        <member name="M:CB.Files.IniParser.#ctor(System.Boolean,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="ignoreCase">If true, compare names by ignoring character case.</param>
+            <param name="compareNamesByCurrentCulture">If true, compare names using the current culture. If false, compare using the invariant culture.</param>
+        </member>
+        <member name="M:CB.Files.IniParser.#ctor(System.String,System.Text.Encoding,System.Boolean,System.Boolean)">
+            <summary>
+            Opens the INI file at the given path and enumerates the values in the IniParser.
+            <para>If the file does not exist, just returns a new instance.</para>
+            </summary>
+            <param name="IniFilePath">Full path to INI file.</param>
+            <param name="encoding"></param>
+            <param name="ignoreCase">If true, compare names by ignoring character case.</param>
+            <param name="compareNamesByCurrentCulture">If true, compare names using the current culture. If false, compare using the invariant culture.</param>
+        </member>
+        <member name="M:CB.Files.IniParser.#ctor(System.IO.Stream,System.Text.Encoding,System.Boolean,System.Boolean)">
+            <summary>
+            Parses the stream and enumerates the values.
+            </summary>
+            <param name="stream">The stream that stores the INI settings.</param>
+            <param name="encoding"></param>
+            <param name="ignoreCase">If true, compare names by ignoring character case.</param>
+            <param name="compareNamesByCurrentCulture">If true, compare names using the current culture. If false, compare using the invariant culture.</param>
+        </member>
+        <member name="M:CB.Files.IniParser.ParseText(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Parses a text that contains the INI lines.
+            <para>Example: IniAsText = "[A] \n B=1"</para>
+            </summary>
+            <param name="IniAsText">This text contains the entire INI 'file'.</param>
+            <param name="ignoreCase">If true, compare names by ignoring character case.</param>
+            <param name="compareNamesByCurrentCulture">If true, compare names using the current culture. If false, compare using the invariant culture.</param>
+        </member>
+        <member name="M:CB.Files.IniParser.GetSetting(System.String,System.String)">
+            <summary>
+            Returns the value for the given section, key pair.
+            Renvoie 'null' si pas de clé ou de section à ce nom.
+            </summary>
+            <param name="sectionName">Section name.</param>
+            <param name="settingName">Key name.</param>
+        </member>
+        <member name="M:CB.Files.IniParser.EnumSection(System.String)">
+            <summary>
+            Enumerates all lines for given section.
+            Réalisé d'un bloc en créant une liste.
+            </summary>
+            <param name="sectionName">Section to enum.</param>
+        </member>
+        <member name="M:CB.Files.IniParser.SectionEnumerator(System.String)">
+            <summary>
+            Enumerates all lines for given section.
+            Progressif avec un 'yield', pour les foreach.
+            </summary>
+            <param name="sectionName">Section to enum.</param>
+        </member>
+        <member name="M:CB.Files.IniParser.AddSetting(System.String,System.String,System.String)">
+            <summary>
+            Adds or updates a setting to the table to be saved.
+            </summary>
+            <param name="sectionName">Section to add under.</param>
+            <param name="settingName">Key name to add.</param>
+            <param name="settingValue">Value of key.</param>
+        </member>
+        <member name="M:CB.Files.IniParser.AddSetting(System.String,System.String)">
+            <summary>
+            Adds or updates a setting to the table to be saved with a null value.
+            </summary>
+            <param name="sectionName">Section to add under.</param>
+            <param name="settingName">Key name to add.</param>
+        </member>
+        <member name="M:CB.Files.IniParser.DeleteSetting(System.String,System.String)">
+            <summary>
+            Remove a setting.
+            </summary>
+            <param name="sectionName">Section to add under.</param>
+            <param name="settingName">Key name to add.</param>
+        </member>
+        <member name="M:CB.Files.IniParser.SaveSettings(System.String)">
+            <summary>
+            Save settings to new file.
+            </summary>
+            <param name="newFilePath">New file path.</param>
+        </member>
+        <member name="M:CB.Files.IniParser.SaveSettings">
+            <summary>
+            Save settings back to ini file.
+            </summary>
+        </member>
+        <member name="T:CB.Graphics.PixelBGR32">
+            <summary>
+            ABGR pixel in a Int32.
+            <para>Implements comparison operators and functions.</para>
+            </summary>
+        </member>
+        <member name="F:CB.Graphics.PixelBGR32.Blue">
+            <summary>
+            Blue component.
+            </summary>
+        </member>
+        <member name="F:CB.Graphics.PixelBGR32.Green">
+            <summary>
+            Green component.
+            </summary>
+        </member>
+        <member name="F:CB.Graphics.PixelBGR32.Red">
+            <summary>
+            Red component.
+            </summary>
+        </member>
+        <member name="F:CB.Graphics.PixelBGR32.Opacity">
+            <summary>
+            Opcaity component.
+            0 = transparent. 255 = opaque.
+            </summary>
+        </member>
+        <member name="F:CB.Graphics.PixelBGR32.AsInt32">
+            <summary>
+            Bits 0 to 7 are Blue.
+            Bits 8 to 15 are Green.
+            Bits 16 to 23 are Red.
+            Bits 24 to 31 are the opacity.
+            </summary>
+        </member>
+        <member name="M:CB.Graphics.PixelBGR32.op_Equality(CB.Graphics.PixelBGR32,CB.Graphics.PixelBGR32)">
+            <summary>
+            True if a == b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Graphics.PixelBGR32.op_Inequality(CB.Graphics.PixelBGR32,CB.Graphics.PixelBGR32)">
+            <summary>
+            True if a != b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Graphics.PixelBGR32.op_Implicit(CB.Graphics.PixelBGR32)~System.Int32">
+            <summary>
+            Implicitly transtyped to an Int32.
+            </summary>
+            <param name="p"></param>
+        </member>
+        <member name="M:CB.Graphics.PixelBGR32.op_Implicit(System.Int32)~CB.Graphics.PixelBGR32">
+            <summary>
+            Implicitly transtyped from an Int32.
+            </summary>
+            <param name="i"></param>
+        </member>
+        <member name="M:CB.Graphics.PixelBGR32.Equals(System.Object)">
+            <summary>
+            True if this equals the <paramref name="obj"/>.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Graphics.PixelBGR32.GetHashCode">
+            <summary>
+            Returns the hash code.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:CB.Graphics.PixelBGR32.Luminosity">
+            <summary>
+            A simple luminosity calculus.
+            </summary>
+        </member>
+        <member name="P:CB.Graphics.PixelBGR32.Transparency">
+            <summary>
+            = (255 - Opacity)
+            </summary>
+        </member>
+        <member name="P:CB.Graphics.PixelBGR32.Size">
+            <summary>
+            4 bytes per pixel.
+            </summary>
+        </member>
+        <member name="M:CB.Graphics.PixelBGR32.FromInt32(System.Int32)">
+            <summary>
+            Transtypes from an Int32.
+            </summary>
+            <param name="i"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Graphics.PixelBGR32.FromRGB(System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Builds from given the color components.
+            </summary>
+            <param name="r"></param>
+            <param name="g"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Graphics.PixelBGR32.FromARGB(System.Byte,System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Builds from the given color components and opacity.
+            </summary>
+            <param name="o"></param>
+            <param name="r"></param>
+            <param name="g"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Graphics.PixelBGR32.FromRGB(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Builds from given the color components, given as Int32s.
+            </summary>
+            <param name="r"></param>
+            <param name="g"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Graphics.PixelBGR32.ToString">
+            <summary>
+            A representation as a String.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Graphics.PixelBGR32.Equals(CB.Graphics.PixelBGR32)">
+            <summary>
+            True this equals the <paramref name="other"/>.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CB.OperatingSystem.EnvironmentEx">
+            <summary>
+            Helpers about the operating system's environment in general (similar to <see cref="T:System.Environment"/>).
+            </summary>
+        </member>
+        <member name="P:CB.OperatingSystem.EnvironmentEx.Is64BitOperatingSystem">
+            <summary>
+            True if the operating system is 64-bits (at least).
+            <para>Of course the process can be 32-bits even when the operating system is 64-bits.</para>
+            </summary>
+        </member>
+        <member name="P:CB.OperatingSystem.EnvironmentEx.Is64BitProcess">
+            <summary>
+            True if the process is 64-bits.
+            <para>True implies the operating system is 64-bits too.</para>
+            </summary>
+        </member>
+        <member name="P:CB.OperatingSystem.EnvironmentEx.UserIsAdmin">
+            <summary>
+            True if the current user account has an administrator role.
+            <para>An administrator account is supposed to be able to obtain elevated rights.</para>
+            </summary>
+        </member>
+        <member name="T:CB.OperatingSystem.Win32ExceptionEx">
+            <summary>
+            Throws an exception with the Marshal.GetLastWin32Error() added at the end of the message.
+            </summary>
+        </member>
+        <member name="M:CB.OperatingSystem.Win32ExceptionEx.#ctor(System.String)">
+            <summary>
+            Throws an exception with the Marshal.GetLastWin32Error() added at the end of the message.
+            </summary>
+            <param name="message">The first part of the exception message.</param>
+        </member>
+        <member name="T:CB.Parallelism.InconsistentArgumentsException">
+            <summary>
+            "The arguments are inconsistent. They no not match each other."
+            </summary>
+        </member>
+        <member name="M:CB.Parallelism.InconsistentArgumentsException.#ctor">
+            <summary>
+            "The arguments are inconsistent. They no not match each other."
+            </summary>
+        </member>
+        <member name="T:CB.Parallelism.OriginalAccessViolationException">
+            <summary>
+            "Direct access to the original data is prohibited. You have to claim an immutable copy of this instance first."
+            </summary>
+        </member>
+        <member name="M:CB.Parallelism.OriginalAccessViolationException.#ctor">
+            <summary>
+            "Direct access to the original data is prohibited. You have to claim an immutable copy of this instance first."
+            </summary>
+        </member>
+        <member name="T:CB.Parallelism.CopyAccessViolationException">
+            <summary>
+            "Copied data can not be modified. You have to modify data of the original class instance class."
+            </summary>
+        </member>
+        <member name="M:CB.Parallelism.CopyAccessViolationException.#ctor">
+            <summary>
+            "Copied data can not be modified. You have to modify data of the original class instance class."
+            </summary>
+        </member>
+        <member name="T:CB.Parallelism.ParallelClass`1">
+            <summary>
+            A class where its data provides parallel access almost transparently.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:CB.Parallelism.ParallelClass`1.GetAnImmutableCopy">
+            <summary>
+            Returns a immutable copy.
+            This is the only way to read the data.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Parallelism.Consistent`1">
+            <summary>
+            A consistent class.
+            Its data can be modified, but all at once.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:CB.Parallelism.Consistent`1.Data">
+            <summary>
+            A consistent state of the data.
+            </summary>
+        </member>
+        <member name="M:CB.Parallelism.Consistent`1.#ctor(`0)">
+            <summary>
+            Initializes a consistent class.
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="M:CB.Parallelism.Consistent`1.#ctor(CB.Data.NonNull{`0})">
+            <summary>
+            Initializes a consistent class with a non-null data.
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="T:CB.Processus.ProcessEx">
+            <summary>
+            Helpers for <see cref="T:System.Diagnostics.Process"/>.
+            </summary>
+        </member>
+        <member name="P:CB.Processus.ProcessEx.ShellName">
+            <summary>
+            Gets the shell process executable name.
+            Example: "explorer.exe".
+            </summary>
+        </member>
+        <member name="P:CB.Processus.ProcessEx.ShellProcesses">
+            <summary>
+            Gets all running shells (usually "explorer.exe").
+            </summary>
+        </member>
+        <member name="M:CB.Processus.ProcessEx.StartsAsElevated(System.Diagnostics.ProcessStartInfo)">
+            <summary>
+            Starts the process as elevated, that is as an administrator.
+            <para>On Windows XP and previous, the started process must check it is really elevated (because it can be started as any user).</para>
+            </summary>
+            <param name="psi"></param>
+            <returns></returns>
+            <exception cref="T:System.ComponentModel.Win32Exception">User has canceled the UAC prompt. Or an error occurred when opening the associated file. -or-The sum of the length of the arguments and the length of the full path to the process exceeds 2080. The error message associated with this exception can be one of the following: "The data area passed to a system call is too small." or "Access is denied."</exception>
+            <exception cref="T:System.InvalidOperationException">No file name was specified in the startInfo parameter's System.Diagnostics.ProcessStartInfo.FileName property.-or- The System.Diagnostics.ProcessStartInfo.UseShellExecute property of the startInfo parameter is true and the System.Diagnostics.ProcessStartInfo.RedirectStandardInput, System.Diagnostics.ProcessStartInfo.RedirectStandardOutput, or System.Diagnostics.ProcessStartInfo.RedirectStandardError property is also true.-or-The System.Diagnostics.ProcessStartInfo.UseShellExecute property of the startInfo parameter is true and the System.Diagnostics.ProcessStartInfo.UserName property is not null or empty or the System.Diagnostics.ProcessStartInfo.Password property is not null.</exception>
+            <exception cref="T:System.ArgumentNullException">The <paramref name="psi"/> parameter is null.</exception>
+            <exception cref="T:System.ObjectDisposedException">The process object has already been disposed.</exception>
+            <exception cref="T:System.IO.FileNotFoundException">The file specified in the startInfo parameter's System.Diagnostics.ProcessStartInfo.FileName property could not be found.</exception>
+        </member>
+        <member name="M:CB.Processus.ProcessEx.SetDebugPrivilege">
+            <summary>
+            Obtains Debug privilege for the current process.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="F:CB.Processus.NativeStructures.PrivilegeAttributes.Disabled">
+            <summary>Privilege is disabled.</summary>
+        </member>
+        <member name="F:CB.Processus.NativeStructures.PrivilegeAttributes.EnabledByDefault">
+            <summary>Privilege is enabled by default.</summary>
+        </member>
+        <member name="F:CB.Processus.NativeStructures.PrivilegeAttributes.Enabled">
+            <summary>Privilege is enabled.</summary>
+        </member>
+        <member name="F:CB.Processus.NativeStructures.PrivilegeAttributes.Removed">
+            <summary>Privilege is removed.</summary>
+        </member>
+        <member name="F:CB.Processus.NativeStructures.PrivilegeAttributes.UsedForAccess">
+            <summary>Privilege used to gain access to an object or service.</summary>
+        </member>
+        <member name="T:CB.Reflection.MemberInfoOf">
+            <summary>
+            Retreives a <see cref="T:System.Reflection.MemberInfo"/>.
+            Note: These functions use reflection, therefore can be slow.
+            </summary>
+        </member>
+        <member name="M:CB.Reflection.MemberInfoOf.Parameter``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+            Gets the <see cref="T:System.Reflection.MemberInfo"/> of a function parameter.
+            Example in Main() : var argsName = MemberInfoOf.Parameter(()=>args);
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="f"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Reflection.MemberInfoOf.StaticFieldOrProperty``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+            Gets the <see cref="T:System.Reflection.MemberInfo"/> of a static data member (field or property).
+            Example with a static class field: <code>var staticFieldName = MemberInfoOf.StaticFieldOrProperty(() => Program.staticField).Name;</code>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="f"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Reflection.MemberInfoOf.InstanceField``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Gets the <see cref="T:System.Reflection.MemberInfo"/> of an instance field.
+            <para>
+            Example: <code>var fieldName = MemberInfoOf.InstanceField&lt;TestClass, int&gt;(a =&gt; a.Field1).Name;</code>
+            Example: <code>var fieldType = MemberInfoOf.InstanceField&lt;TestClass, int&gt;(a =&gt; a.Field1).FieldType;</code>
+            </para>
+            </summary>
+            <typeparam name="TC">Main type</typeparam>
+            <typeparam name="TM">Member type</typeparam>
+            <param name="f"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Reflection.MemberInfoOf.InstanceProperty``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Gets the <see cref="T:System.Reflection.MemberInfo"/> of an instance property.
+            <para>
+            Example: <code>var propertyName = MemberInfoOf.InstanceProperty&lt;TestClass, int&gt;(a =&gt; a.Property1).Name;</code>
+            Example: <code>var propertyType = MemberInfoOf.InstanceProperty&lt;TestClass, int&gt;(a =&gt; a.Property1).PropertyType;</code>
+            </para>
+            </summary>
+            <typeparam name="TC">Main type</typeparam>
+            <typeparam name="TM">Member type</typeparam>
+            <param name="f"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Reflection.MemberInfoOf.InstanceFieldOrProperty``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Gets the <see cref="T:System.Reflection.MemberInfo"/> of an instance member (field or property).
+            Note: you do not need an actual instance.
+            Example with an instance class field: <code>var instanceFieldName = MemberInfoOf.InstanceFieldOrProperty&lt;Program, int&gt;(u =&gt; u.instanceField).Name;</code>
+            </summary>
+            <typeparam name="TC">Main type</typeparam>
+            <typeparam name="TM">Member type</typeparam>
+            <param name="f"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Reflection.MemberInfoOf.Function(System.Delegate)">
+            <summary>
+            Gets the <see cref="T:System.Reflection.MemberInfo"/> of an instance or static function.
+            Note: for an instance function on a class type, you need an actual instance (null is not valid).
+            Example: <code>var thisInstanceFunctionName = MemberInfoOf.Function((Action)this.InstanceFunction).Name;</code>
+            Example: <code>var staticFunctionName = MemberInfoOf.Function((Func&lt;MemberInfo, int&gt;)test.staticFunction).Name;</code>
+            </summary>
+            <param name="f"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Reflection.MemberInfoOf.InstanceFunction``1(System.Linq.Expressions.Expression{System.Func{``0,System.Delegate}})">
+            <summary>
+            Gets the <see cref="T:System.Reflection.MemberInfo"/> of an instance (not static) function.
+            Note: you do not need an actual instance.
+            Example: var instanceFunctionName = MemberInfoOf.InstanceFunction&lt;Program&gt;(u => (Func&lt;MemberInfo, int&gt;)u.InstanceFunction);
+            </summary>
+            <typeparam name="TC">Main type</typeparam>
+            <param name="f"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Reflection.NameOf">
+            <summary>	
+            Similar to 'nameof' in C# ≤ 5 (and VS ≤ 2013).
+            Note: These functions use reflection, therefore are much slower than 'nameof'.
+            </summary>
+        </member>
+        <member name="M:CB.Reflection.NameOf.Parameter``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+            Gets the name of a function parameter.
+            Example in Main() : var argsName = NameOf.Parameter(()=&gt;args);
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="f"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Reflection.NameOf.StaticFieldOrProperty``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+            <summary>
+            Gets the name of a static data member (field or property).
+            Example with a static class field: var staticFieldName = NameOf.StaticFieldOrProperty(() =&gt; Program.staticField);
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="f"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Reflection.NameOf.InstanceFieldOrProperty``2(System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Gets the name of an instance member (field or property).
+            Note: you do not need an actual instance.
+            Example with an instance class field: var instanceFieldName = NameOf&lt;Program, int&gt;(u =&gt; u.instanceField);
+            </summary>
+            <typeparam name="TC">The type.</typeparam>
+            <typeparam name="TM">The member type.</typeparam>
+            <param name="f"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Reflection.NameOf.Function(System.Delegate)">
+            <summary>
+            Gets the name of an instance or static function.
+            Note: for an instance function on a class type, you need an actual instance (null is not valid).
+            Example: var thisInstanceFunctionName = NameOf.Function((Action)this.InstanceFunction);
+            Example: var staticFunctionName = NameOf.Function((Func&lt;string, int&gt;)test.staticFunction);
+            </summary>
+            <param name="f"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Reflection.NameOf.InstanceFunction``1(System.Linq.Expressions.Expression{System.Func{``0,System.Delegate}})">
+            <summary>
+            Gets the name of an instance (not static) function.
+            Note: you do not need an actual instance.
+            Example: var instanceFunctionName = NameOf.InstanceFunction&lt;Program&gt;(u =&gt; (Func&lt;string, int&gt;)u.InstanceFunction);
+            </summary>
+            <param name="f"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Reflection.Reflection">
+            <summary>
+            Helpers for reflection classes such as <see cref="T:System.Reflection.MemberInfo"/>.
+            </summary>
+        </member>
+        <member name="M:CB.Reflection.Reflection.IsEqualTo(System.Reflection.FieldInfo,System.Reflection.FieldInfo)">
+            <summary>
+            Functional comparer (unlike FieldInfo.Equals or FieldInfo.== that do not work correctly).
+            </summary>
+            <param name="f1"></param>
+            <param name="f2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Reflection.Reflection.IsEqualTo(System.Reflection.PropertyInfo,System.Reflection.PropertyInfo)">
+            <summary>
+            Functional comparer (unlike PropertyInfo.Equals or PropertyInfo.== that do not work correctly).
+            </summary>
+            <param name="f1"></param>
+            <param name="f2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Reflection.Reflection.IsEqualTo(System.Reflection.MemberInfo,System.Reflection.MemberInfo)">
+            <summary>
+            Functional comparer (unlike MemberInfo.Equals or MemberInfo.== that do not work correctly).
+            </summary>
+            <param name="f1"></param>
+            <param name="f2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Reflection.Reflection.IsEqualTo(System.Reflection.MethodInfo,System.Reflection.MethodInfo)">
+            <summary>
+            Functional comparer (unlike MethodInfo.Equals or MethodInfo.== that do not work correctly).
+            </summary>
+            <param name="f1"></param>
+            <param name="f2"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Reflection.Reflection.IsEqualTo(System.Reflection.ParameterInfo,System.Reflection.ParameterInfo)">
+            <summary>
+            Functional comparer (unlike ParameterInfo.Equals or ParameterInfo.== that do not work correctly).
+            </summary>
+            <param name="f1"></param>
+            <param name="f2"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Reflection.FieldInfoComparer">
+            <summary>
+            The standard comparison of FieldInfo is incorrect. This comparer fills the gap.
+            <para>It can be used in the constructor of various collection types, as HashSet and Dictionary.</para>
+            </summary>
+        </member>
+        <member name="F:CB.Reflection.FieldInfoComparer.StaticComparer">
+            <summary>
+            The standard comparison of FieldInfo is incorrect. This comparer fills the gap.
+            </summary>
+        </member>
+        <member name="M:CB.Reflection.FieldInfoComparer.Equals(System.Reflection.FieldInfo,System.Reflection.FieldInfo)">
+            <summary>
+            True if x really equals y.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Reflection.FieldInfoComparer.GetHashCode(System.Reflection.FieldInfo)">
+            <summary>
+            Returns a hash code.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Reflection.PropertyInfoComparer">
+            <summary>
+            The standard comparison of PropertyInfo is incorrect. This comparer fills the gap.
+            <para>It can be used in the constructor of various collection types, as HashSet and Dictionary.</para>
+            </summary>
+        </member>
+        <member name="F:CB.Reflection.PropertyInfoComparer.StaticComparer">
+            <summary>
+            The standard comparison of PropertyInfo is incorrect. This comparer fills the gap.
+            </summary>
+        </member>
+        <member name="M:CB.Reflection.PropertyInfoComparer.Equals(System.Reflection.PropertyInfo,System.Reflection.PropertyInfo)">
+            <summary>
+            True if x really equals y.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Reflection.PropertyInfoComparer.GetHashCode(System.Reflection.PropertyInfo)">
+            <summary>
+            Returns a hash code.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Reflection.MemberInfoComparer">
+            <summary>
+            The standard comparison of MemberInfo is incorrect. This comparer fills the gap.
+            <para>It can be used in the constructor of various collection types, as HashSet and Dictionary.</para>
+            </summary>
+        </member>
+        <member name="F:CB.Reflection.MemberInfoComparer.StaticComparer">
+            <summary>
+            The standard comparison of MemberInfo is incorrect. This comparer fills the gap.
+            </summary>
+        </member>
+        <member name="M:CB.Reflection.MemberInfoComparer.Equals(System.Reflection.MemberInfo,System.Reflection.MemberInfo)">
+            <summary>
+            True if x really equals y.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Reflection.MemberInfoComparer.GetHashCode(System.Reflection.MemberInfo)">
+            <summary>
+            Returns a hash code.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Reflection.MethodInfoComparer">
+            <summary>
+            The standard comparison of MethodInfo is incorrect. This comparer fills the gap.
+            <para>It can be used in the constructor of various collection types, as HashSet and Dictionary.</para>
+            </summary>
+        </member>
+        <member name="F:CB.Reflection.MethodInfoComparer.StaticComparer">
+            <summary>
+            The standard comparison of MethodInfo is incorrect. This comparer fills the gap.
+            </summary>
+        </member>
+        <member name="M:CB.Reflection.MethodInfoComparer.Equals(System.Reflection.MethodInfo,System.Reflection.MethodInfo)">
+            <summary>
+            True if x really equals y.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Reflection.MethodInfoComparer.GetHashCode(System.Reflection.MethodInfo)">
+            <summary>
+            Returns a hash code.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Reflection.ParameterInfoComparer">
+            <summary>
+            The standard comparison of ParameterInfo is incorrect. This comparer fills the gap.
+            <para>It can be used in the constructor of various collection types, as HashSet and Dictionary.</para>
+            </summary>
+        </member>
+        <member name="F:CB.Reflection.ParameterInfoComparer.StaticComparer">
+            <summary>
+            The standard comparison of ParameterInfo is incorrect. This comparer fills the gap.
+            </summary>
+        </member>
+        <member name="M:CB.Reflection.ParameterInfoComparer.Equals(System.Reflection.ParameterInfo,System.Reflection.ParameterInfo)">
+            <summary>
+            True if x really equals y.
+            </summary>
+            <param name="x"></param>
+            <param name="y"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Reflection.ParameterInfoComparer.GetHashCode(System.Reflection.ParameterInfo)">
+            <summary>
+            Returns a hash code.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Text.StringWithHashCode">
+            <summary>
+            A string and its pre-computed hash code.
+            <para>The pre-computed hash code accelerates comparisons (when strings are different).</para>
+            <para>Useful to speedup string dictionaries.</para>
+            <para>Like <see cref="T:System.String"/>, this value is immutable (invariable).</para>
+            </summary>
+        </member>
+        <member name="F:CB.Text.StringWithHashCode.Value">
+            <summary>
+            The main value is the string.
+            <para>Can be null.</para>
+            </summary>
+        </member>
+        <member name="F:CB.Text.StringWithHashCode.HashCode">
+            <summary>
+            The hash code of our string.
+            </summary>
+        </member>
+        <member name="P:CB.Text.StringWithHashCode.Length">
+            <summary>
+            Gets the number of characters in the string.
+            </summary>
+        </member>
+        <member name="P:CB.Text.StringWithHashCode.HasValue">
+            <summary>
+            True is the string is not null.
+            </summary>
+        </member>
+        <member name="F:CB.Text.StringWithHashCode.Empty">
+            <summary>
+            An empty <see cref="T:CB.Text.StringWithHashCode"/>.
+            </summary>
+        </member>
+        <member name="M:CB.Text.StringWithHashCode.#ctor(System.String)">
+            <summary>
+            Builds a new <see cref="T:CB.Text.StringWithHashCode"/>.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:CB.Text.StringWithHashCode.GetHashCode">
+            <summary>
+            Gets the hash code of the string, or 0 if the string is null.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Text.StringWithHashCode.ToString">
+            <summary>
+            Returns the string itself, or null if the string is null.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Text.StringWithHashCode.Equals(System.Object)">
+            <summary>
+            True if the string equals the <paramref name="obj"/>.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Text.StringWithHashCode.op_Equality(CB.Text.StringWithHashCode,CB.Text.StringWithHashCode)">
+            <summary>
+            True if a == b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Text.StringWithHashCode.op_Inequality(CB.Text.StringWithHashCode,CB.Text.StringWithHashCode)">
+            <summary>
+            True if a != b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Text.StringWithHashCode.op_Equality(CB.Text.StringWithHashCode,System.String)">
+            <summary>
+            True if a == b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Text.StringWithHashCode.op_Inequality(CB.Text.StringWithHashCode,System.String)">
+            <summary>
+            True if a != b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Text.StringWithHashCode.Equals(CB.Text.StringWithHashCode)">
+            <summary>
+            True if the string equals the <paramref name="other"/>.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Text.StringWithHashCode.CompareTo(CB.Text.StringWithHashCode)">
+            <summary>
+            Retuns 0 if the strings are equal, or if both have no value.
+            Otherwize, compare positions in the sort order (see <see cref="M:System.String.CompareTo(System.String)"/> for more information).
+            Retuns -1 if this string is less than the <paramref name="other"/>, or if this string has no value while the <paramref name="other"/> has a value.
+            Retuns 1 if this string is more than the <paramref name="other"/>, or if this string has a value while the <paramref name="other"/> has no value.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Text.StringWithHashCode.op_Implicit(System.String)~CB.Text.StringWithHashCode">
+            <summary>
+            Transtype the string to a <see cref="T:CB.Text.StringWithHashCode"/>.
+            </summary>
+            <param name="s"></param>
+        </member>
+        <member name="M:CB.Text.StringWithHashCode.op_Implicit(CB.Text.StringWithHashCode)~System.String">
+            <summary>
+            Transtype the <see cref="T:CB.Text.StringWithHashCode"/> to a string.
+            </summary>
+            <param name="s"></param>
+        </member>
+        <member name="T:CB.Text.StringWithCache">
+            <summary>
+            CB: A string and its pre-computed hash code. A cache memorizes equality comparisons (but not <see ref="CB.Text.StringWithCache.CompareTo(StringWithCache)"/>).
+            <para>Useful when comparing big strings that are often equal.</para>
+            <para>Like <see cref="T:System.String"/>, this value is immutable (invariable).</para>
+            </summary>
+        </member>
+        <member name="F:CB.Text.StringWithCache.Value">
+            <summary>
+            The main value is the string.
+            <para>Can be null.</para>
+            </summary>
+        </member>
+        <member name="F:CB.Text.StringWithCache.HashCode">
+            <summary>
+            The hash code of the string.
+            <para>This value is cached (calculated once for all and memorized accross instances).</para>
+            </summary>
+        </member>
+        <member name="P:CB.Text.StringWithCache.Length">
+            <summary>
+            Gets the number of characters in the string.
+            </summary>
+        </member>
+        <member name="P:CB.Text.StringWithCache.HasValue">
+            <summary>
+            True is the string is not null.
+            </summary>
+        </member>
+        <member name="F:CB.Text.StringWithCache.Empty">
+            <summary>
+            An empty <see cref="T:CB.Text.StringWithCache"/>.
+            </summary>
+        </member>
+        <member name="M:CB.Text.StringWithCache.#ctor(System.String)">
+            <summary>
+            Builds a new <see cref="T:CB.Text.StringWithCache"/>.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:CB.Text.StringWithCache.GetHashCode">
+            <summary>
+            Gets the hash code of the string, or 0 if the string is null.
+            <para>This value is cached (calculated once for all and memorized accross instances).</para>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Text.StringWithCache.ToString">
+            <summary>
+            Returns the string itself, or null if the string is null.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Text.StringWithCache.Equals(System.Object)">
+            <summary>
+            True if the string equals the <paramref name="obj"/>.
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Text.StringWithCache.Equals(CB.Text.StringWithCache)">
+            <summary>
+            True if the string equals the <paramref name="other"/>.
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Text.StringWithCache.op_Equality(CB.Text.StringWithCache,CB.Text.StringWithCache)">
+            <summary>
+            True if a == b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Text.StringWithCache.op_Inequality(CB.Text.StringWithCache,CB.Text.StringWithCache)">
+            <summary>
+            True if a != b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Text.StringWithCache.op_Equality(CB.Text.StringWithCache,System.String)">
+            <summary>
+            True if a == b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Text.StringWithCache.op_Inequality(CB.Text.StringWithCache,System.String)">
+            <summary>
+            True if a != b.
+            </summary>
+            <param name="a"></param>
+            <param name="b"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Text.StringWithCache.op_Implicit(System.String)~CB.Text.StringWithCache">
+            <summary>
+            Transtype the string to a <see cref="T:CB.Text.StringWithCache"/>.
+            </summary>
+            <param name="s"></param>
+        </member>
+        <member name="M:CB.Text.StringWithCache.op_Implicit(CB.Text.StringWithCache)~System.String">
+            <summary>
+            Transtype the <see cref="T:CB.Text.StringWithCache"/> to a string.
+            </summary>
+            <param name="s"></param>
+        </member>
+        <member name="M:CB.Text.StringWithCache.CompareTo(CB.Text.StringWithCache)">
+            <summary>
+            Retuns 0 if the strings are equal, or if both have no value.
+            Otherwize, compare positions in the sort order (see <see cref="M:System.String.CompareTo(System.String)"/> for more information).
+            Retuns -1 if this string is less than the <paramref name="other"/>, or if this string has no value while the <paramref name="other"/> has a value.
+            Retuns 1 if this string is more than the <paramref name="other"/>, or if this string has a value while the <paramref name="other"/> has no value.
+            <para>Warning: this comparison is not cached (unlike the equality comparison).</para>
+            </summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Text.Unicode">
+            <summary>
+            Helpers for Unicode texts.
+            </summary>
+        </member>
+        <member name="M:CB.Text.Unicode.ToCodePoints(System.String)">
+            <summary>
+            Returns code points.
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Text.Unicode.ToCodePoints2(System.String)">
+            <summary>
+            Returns code points (alternate method).
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Text.Unicode.ToTextElements(System.String)">
+            <summary>
+            Returns text elements.
+            </summary>
+            <param name="s"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Validation.InCodeConditionException">
+            <summary>
+            Something went wrong during the execution of a method.
+            </summary>
+        </member>
+        <member name="M:CB.Validation.InCodeConditionException.#ctor(System.String,System.Exception)">
+            <summary>
+            Something went wrong during the execution of a method.
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:CB.Validation.InCodeConditionException.#ctor(System.Exception)">
+            <summary>
+            Something went wrong during the execution of a method.
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="T:CB.Validation.InitializationConditionException">
+            <summary>
+            Something went wrong during the initialization of a type.
+            </summary>
+        </member>
+        <member name="M:CB.Validation.InitializationConditionException.#ctor(System.String,System.Exception)">
+            <summary>
+            Something went wrong during the initialization of a type.
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:CB.Validation.InitializationConditionException.#ctor(System.Type,System.Exception)">
+            <summary>
+            Something went wrong during the initialization of a type.
+            </summary>
+            <param name="initializingType"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="T:CB.Validation.BeforeCodeConditionException">
+            <summary>
+            A method requirement is not adequate.
+            <para>It can be due to a parameter, or a more global reason. Please see the inner exception, if any.</para>
+            </summary>
+        </member>
+        <member name="M:CB.Validation.BeforeCodeConditionException.#ctor(System.String,System.Exception)">
+            <summary>
+            A method requirement is not adequate.
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:CB.Validation.BeforeCodeConditionException.#ctor(System.Exception)">
+            <summary>
+            A method requirement is not adequate.
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="T:CB.Validation.AfterCodeConditionException">
+            <summary>
+            The final state is wrong.
+            </summary>
+        </member>
+        <member name="M:CB.Validation.AfterCodeConditionException.#ctor(System.String,System.Exception)">
+            <summary>
+            The final state is wrong.
+            </summary>
+            <param name="message"></param>
+            <param name="innerException"></param>
+        </member>
+        <member name="M:CB.Validation.AfterCodeConditionException.#ctor(System.Exception)">
+            <summary>
+            The final state is wrong.
+            </summary>
+            <param name="innerException"></param>
+        </member>
+        <member name="T:CB.Validation.ReleaseCheck">
+            <summary>
+            Checks Contract-like conditions, both in release and in debug compilation mode.
+            <para>In the context of <see cref="T:CB.Execution.Ret`1">the error codes philosophy</see>, this class should be applied to non-planned errors (that is, programming errors) only.</para>
+            </summary>
+        </member>
+        <member name="M:CB.Validation.ReleaseCheck.InCode(System.Boolean,System.String,System.Object[])">
+            <summary>
+            Checks an assertion, even in release compilation mode.
+            Message parameters are formatted using CultureInfo.InvariantCulture.
+            </summary>
+            <param name="condition"></param>
+            <param name="formattedMessage"></param>
+            <param name="messageParameters"></param>
+            <example>Release.InCode(a == b, "{0} ≠ {1}", a, b);</example>
+        </member>
+        <member name="M:CB.Validation.ReleaseCheck.Initialization(System.Boolean,System.String,System.Object[])">
+            <summary>
+            Checks an assertion during a type initialization, even in release compilation mode.
+            Message parameters are formatted using CultureInfo.InvariantCulture.
+            </summary>
+            <param name="condition"></param>
+            <param name="formattedMessage"></param>
+            <param name="messageParameters"></param>
+            <example>Release.InCode(a == b, "{0} ≠ {1}", a, b);</example>
+        </member>
+        <member name="M:CB.Validation.ReleaseCheck.Initialization(System.Boolean,System.Type)">
+            <summary>
+            Checks an assertion during a type initialization, even in release compilation mode.
+            Message parameters are formatted using CultureInfo.InvariantCulture.
+            </summary>
+            <param name="condition"></param>
+            <param name="initializingType"></param>
+            <example>Release.InCode(a == b, "{0} ≠ {1}", a, b);</example>
+        </member>
+        <member name="M:CB.Validation.ReleaseCheck.ThrowsInCode(System.String,System.Object[])">
+            <summary>
+            Throws an <see cref="T:CB.Validation.InCodeConditionException"/>.
+            </summary>
+            <param name="formattedMessage"></param>
+            <param name="messageParameters"></param>
+        </member>
+        <member name="M:CB.Validation.ReleaseCheck.InCodeStringIsDefined(System.String)">
+            <summary>
+            Checks the string is not null nor empty.
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:CB.Validation.ReleaseCheck.ReferenceIsDefined``1(``0)">
+            <summary>
+            Checks the reference is not null.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="reference"></param>
+        </member>
+        <member name="M:CB.Validation.ReleaseCheck.InCodeShouldNotThrowException(System.Action)">
+            <summary>
+            Checks the action does not throw an exception.
+            </summary>
+            <param name="a"></param>
+        </member>
+        <member name="M:CB.Validation.ReleaseCheck.InCodeShouldNotThrowException``1(System.Func{``0})">
+            <summary>
+            Checks the function does not throw an exception.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="a"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Validation.ReleaseCheck.AfterCode(System.Boolean,System.String,System.Object[])">
+            <summary>
+            Checks a condition at method ending, usually on the return value, even in release compilation mode.
+            Message parameters are formatted using CultureInfo.InvariantCulture.
+            </summary>
+            <param name="condition"></param>
+            <param name="formattedMessage"></param>
+            <param name="messageParameters"></param>
+            <example>Release.AfterCode(a == b, "{0} ≠ {1}", a, b);</example>
+        </member>
+        <member name="M:CB.Validation.ReleaseCheck.ThrowsAfterCode(System.String,System.Object[])">
+            <summary>
+            Throws an <see cref="T:CB.Validation.AfterCodeConditionException"/>.
+            </summary>
+            <param name="formattedMessage"></param>
+            <param name="messageParameters"></param>
+        </member>
+        <member name="M:CB.Validation.ReleaseCheck.BeforeCode(System.Boolean,System.String,System.Object[])">
+            <summary>
+            Checks a requirement at method beggining, usually on a parameter, even in release compilation mode.
+            Message parameters are formatted using CultureInfo.InvariantCulture.
+            
+            Note: if you check a method parameter, please call ParameterXXX() instead.
+            </summary>
+            <param name="condition"></param>
+            <param name="formattedMessage"></param>
+            <param name="messageParameters"></param>
+            <example>Release.BeforeCode(a == b, "{0} ≠ {1}", a, b);</example>
+        </member>
+        <member name="M:CB.Validation.ReleaseCheck.ThrowsBeforeCode(System.String,System.Object[])">
+            <summary>
+            Throws a <see cref="T:CB.Validation.BeforeCodeConditionException"/>.
+            </summary>
+            <param name="formattedMessage"></param>
+            <param name="messageParameters"></param>
+        </member>
+        <member name="M:CB.Validation.ReleaseCheck.Parameter(System.Boolean,System.String)">
+            <summary>
+            Checks the parameter fullfills the condition.
+            </summary>
+            <param name="condition"></param>
+            <param name="message">Optional error message.</param>
+            <exception cref="T:CB.Validation.BeforeCodeConditionException"/>
+        </member>
+        <member name="M:CB.Validation.ReleaseCheck.ParameterIndexIsInRange(System.Int32,System.Collections.ICollection)">
+            <summary>
+            Checks the parameter index is in the range of the collection.
+            </summary>
+        </member>
+        <member name="M:CB.Validation.ReleaseCheck.ParameterIndexIsInRange(System.Int32,System.Array)">
+            <summary>
+            Checks the parameter index is in the range of the array.
+            </summary>
+        </member>
+        <member name="M:CB.Validation.ReleaseCheck.Parameters(System.Boolean)">
+            <summary>
+            Checks the parameters fullfill the condition.
+            </summary>
+            <param name="condition"></param>
+        </member>
+        <member name="M:CB.Validation.ReleaseCheck.ParameterIsInRange``1(``0,``0,``0,System.Boolean,System.Boolean)">
+            <summary>
+            Checks the parameter is in the range.
+            </summary>
+            <typeparam name="T">An IComparable&lt;T&gt;</typeparam>
+            <param name="value"></param>
+            <param name="min"></param>
+            <param name="max"></param>
+            <param name="minIncluded"></param>
+            <param name="maxIncluded"></param>
+        </member>
+        <member name="M:CB.Validation.ReleaseCheck.InCodeReferenceIsDefined``1(``0)">
+            <summary>
+            Checks the reference is not null.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="reference"></param>
+        </member>
+        <member name="M:CB.Validation.ReleaseCheck.AfterCodeReferenceIsDefined``1(``0)">
+            <summary>
+            Checks the reference is not null.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="reference"></param>
+        </member>
+        <member name="M:CB.Validation.ReleaseCheck.ParameterIsDefined``1(``0)">
+            <summary>
+            Checks the reference is not null.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="reference"></param>
+        </member>
+        <member name="M:CB.Validation.ReleaseCheck.ParameterEnumIsDefined``1(``0)">
+            <summary>
+            Checks the enumeration value is defined in its enumeration type.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="enumerationValue"></param>
+        </member>
+        <member name="M:CB.Validation.ReleaseCheck.ParameterEnumIsDefinedAsOneValue``1(``0)">
+            <summary>
+            Checks the enumeration value is one of the defined values in its enumeration type.
+            <para>The value can not be a multiple values combination, even if <typeparamref name="T"/> has FlagsAttribute.</para>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="enumerationValue"></param>
+        </member>
+        <member name="M:CB.Validation.ReleaseCheck.ParameterStringIsDefined(System.String)">
+            <summary>
+            Checks the parameter is not null nor empty.
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="T:CB.Validation.DebugCheck">
+            <summary>
+            Checks Contract-like conditions, but only in debug compilation mode.
+            </summary>
+        </member>
+        <member name="M:CB.Validation.DebugCheck.InCode(System.Boolean,System.String,System.Object[])">
+            <summary>
+            Checks an assertion in code, only in debug compilation mode.
+            Message parameters are formatted using CultureInfo.InvariantCulture.
+            </summary>
+            <param name="condition"></param>
+            <param name="formattedMessage"></param>
+            <param name="messageParameters"></param>
+            <example>Debug.InCode(a == b, "{0} ≠ {1}", a, b);</example>
+        </member>
+        <member name="M:CB.Validation.DebugCheck.InCodeStringIsDefined(System.String)">
+            <summary>
+            Checks the string is not null nor empty.
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:CB.Validation.DebugCheck.InCodeReferenceIsDefined``1(``0)">
+            <summary>
+            Checks the reference is not null.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="reference"></param>
+        </member>
+        <member name="M:CB.Validation.DebugCheck.Initialization(System.Boolean,System.String,System.Object[])">
+            <summary>
+            Checks an assertion during a type initialization, even in release compilation mode.
+            Message parameters are formatted using CultureInfo.InvariantCulture.
+            </summary>
+            <param name="condition"></param>
+            <param name="formattedMessage"></param>
+            <param name="messageParameters"></param>
+            <example>Release.InCode(a == b, "{0} ≠ {1}", a, b);</example>
+        </member>
+        <member name="M:CB.Validation.DebugCheck.Initialization(System.Boolean,System.Type)">
+            <summary>
+            Checks an assertion during a type initialization, even in release compilation mode.
+            Message parameters are formatted using CultureInfo.InvariantCulture.
+            </summary>
+            <param name="condition"></param>
+            <param name="initializingType"></param>
+            <example>Release.InCode(a == b, "{0} ≠ {1}", a, b);</example>
+        </member>
+        <member name="M:CB.Validation.DebugCheck.AfterCodeReferenceIsDefined``1(``0)">
+            <summary>
+            Checks the reference is not null.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="reference"></param>
+        </member>
+        <member name="M:CB.Validation.DebugCheck.InCodeShouldNotThrowException(System.Action)">
+            <summary>
+            Checks the action does not throw an exception.
+            </summary>
+            <param name="a"></param>
+        </member>
+        <member name="M:CB.Validation.DebugCheck.AfterCode(System.Boolean,System.String,System.Object[])">
+            <summary>
+            Checks a condition at method ending, usually on the return value, only in debug compilation mode.
+            Message parameters are formatted using CultureInfo.InvariantCulture.
+            </summary>
+            <param name="condition"></param>
+            <param name="formattedMessage"></param>
+            <param name="messageParameters"></param>
+            <example>Debug.AfterCode(a == b, "{0} ≠ {1}", a, b);</example>
+        </member>
+        <member name="M:CB.Validation.DebugCheck.ThrowsAfterCode(System.String,System.Object[])">
+            <summary>
+            Throws an <see cref="T:CB.Validation.AfterCodeConditionException"/>.
+            </summary>
+            <param name="formattedMessage"></param>
+            <param name="messageParameters"></param>
+        </member>
+        <member name="M:CB.Validation.DebugCheck.ThrowsBeforeCode(System.String,System.Object[])">
+            <summary>
+            Throws a <see cref="T:CB.Validation.BeforeCodeConditionException"/>.
+            </summary>
+            <param name="formattedMessage"></param>
+            <param name="messageParameters"></param>
+        </member>
+        <member name="M:CB.Validation.DebugCheck.ThrowsInCode(System.String,System.Object[])">
+            <summary>
+            Throws an <see cref="T:CB.Validation.InCodeConditionException"/>.
+            </summary>
+            <param name="formattedMessage"></param>
+            <param name="messageParameters"></param>
+        </member>
+        <member name="M:CB.Validation.DebugCheck.BeforeCode(System.Boolean,System.String,System.Object[])">
+            <summary>
+            Checks a requirement at method beggining, usually on a parameter, only in debug compilation mode.
+            Message parameters are formatted using CultureInfo.InvariantCulture.
+            
+            Note: if you check a method parameter, please call ParameterXXX() instead.
+            </summary>
+            <param name="condition"></param>
+            <param name="formattedMessage"></param>
+            <param name="messageParameters"></param>
+            <example>Debug.BeforeCode(a == b, "{0} ≠ {1}", a, b);</example>
+        </member>
+        <member name="M:CB.Validation.DebugCheck.Parameter(System.Boolean,System.String)">
+            <summary>
+            Checks the parameter fullfills the condition.
+            </summary>
+            <param name="condition"></param>
+            <param name="message">Optional error messag.</param>
+            <exception cref="T:CB.Validation.BeforeCodeConditionException"/>
+        </member>
+        <member name="M:CB.Validation.DebugCheck.ParameterIndexIsInRange(System.Int32,System.Collections.ICollection)">
+            <summary>
+            Checks the parameter index is in the range of the collection.
+            </summary>
+        </member>
+        <member name="M:CB.Validation.DebugCheck.ParameterIndexIsInRange(System.Int32,System.Array)">
+            <summary>
+            Checks the parameter index is in the range of the array.
+            </summary>
+        </member>
+        <member name="M:CB.Validation.DebugCheck.Parameters(System.Boolean)">
+            <summary>
+            Checks the parameters fullfill the condition.
+            </summary>
+            <param name="condition"></param>
+        </member>
+        <member name="M:CB.Validation.DebugCheck.ParameterIsInRange``1(``0,``0,``0,System.Boolean,System.Boolean)">
+            <summary>
+            Checks the parameter is in the range.
+            </summary>
+            <typeparam name="T">An IComparable&lt;T&gt;</typeparam>
+            <param name="value"></param>
+            <param name="min"></param>
+            <param name="max"></param>
+            <param name="minIncluded"></param>
+            <param name="maxIncluded"></param>
+        </member>
+        <member name="M:CB.Validation.DebugCheck.ParameterIsDefined``1(``0)">
+            <summary>
+            Checks the parameter is not null.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="reference"></param>
+        </member>
+        <member name="M:CB.Validation.DebugCheck.ParameterEnumIsDefined``1(``0)">
+            <summary>
+            Checks the enumeration value is defined in its enumeration type.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="enumeration"></param>
+        </member>
+        <member name="M:CB.Validation.DebugCheck.ParameterEnumIsDefinedAsOneValue``1(``0)">
+            <summary>
+            Checks the enumeration value is one of the defined values in its enumeration type.
+            <para>The value can not be a multiple values combination, even if <typeparamref name="T"/> has FlagsAttribute.</para>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="enumeration"></param>
+        </member>
+        <member name="M:CB.Validation.DebugCheck.ParameterStringIsDefined(System.String)">
+            <summary>
+            Checks the parameter is not null nor empty.
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="T:CB.Xml.AssemblyToXsd">
+            <summary>
+            Extracts a XSD schema from the types an Assembly file (.exe or .dll) declares.
+            </summary>
+        </member>
+        <member name="M:CB.Xml.AssemblyToXsd.ExportTypesAsSchemas(System.Collections.Generic.IList{System.String},System.String,System.Collections.Generic.ICollection{System.String},System.Func{System.Type,System.Boolean})">
+            <summary>
+            Exports the XSD schema of every assembly listed in <paramref name="assemblies"/>.
+            A schema is a representation of all types this assembly declares.
+            </summary>
+            <param name="assemblies">The assemblies from which types will be extracted.</param>
+            <param name="outputDir">Exported XSD files will be written here.</param>
+            <param name="outputMessages"></param>
+            <param name="typeFilter">Lets you filter the type to add to the schema. If null, all types are added.</param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException">Error loading an assembly.</exception>
+        </member>
+        <member name="T:CB.Xml.AssemblyToXsd._AssemblyToXsd">
+            <summary>
+            Extracts a XSD schema from the types an Assembly file (.exe or .dll) declares.
+            </summary>
+        </member>
+        <member name="M:CB.Xml.AssemblyToXsd._AssemblyToXsd.ExportTypesAsSchemas(System.Collections.Generic.IList{System.String},System.String,System.Collections.Generic.ICollection{System.String},System.Func{System.Type,System.Boolean})">
+            <summary>
+            Exports the XSD schema of every assembly listed in <paramref name="assemblies"/>.
+            A schema is a representation of all types this assembly declares.
+            </summary>
+            <param name="assemblies">The assemblies from which types will be extracted.</param>
+            <param name="outputDir">Exported XSD files will be written here.</param>
+            <param name="outputMessages"></param>
+            <param name="typeFilter">Lets you filter the type to add to the schema. If null, all types are added.</param>
+            <returns></returns>
+            <exception cref="T:System.InvalidOperationException">Error loading an assembly.</exception>
+        </member>
+        <member name="T:CB.Xml.XMLExtensions">
+            <summary>
+            Helpers for XML files.
+            </summary>
+        </member>
+        <member name="M:CB.Xml.XMLExtensions.FixLineFeedsInTextNodes(System.String,System.String,System.String)">
+            <summary>
+            Fixes the line-feeds in the tags text.
+            <para>Nethertheless, the line feeds are not removed, just modified.</para>
+            <para>It's useful with software like XML Notepad that transforms line feeds &amp;#10; in \r\n in the text nodes.</para>
+            </summary>
+            <param name="xml"></param>
+            <param name="sourceForm"></param>
+            <param name="targetForm"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Xml.XMLExtensions.GetCompleteValue(System.Xml.Linq.XElement)">
+            <summary>
+            CB: Returns the entire value, including xml sub-elements as a text.
+            </summary>
+            <param name="element"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Xml.XMLExtensions.SaveToFile(System.Xml.Linq.XElement,System.String)">
+            <summary>
+            CB: Saves the xml text code to a file.
+            </summary>
+            <param name="xElement"></param>
+            <param name="fileName"></param>
+        </member>
+        <member name="T:CBdotnet.TypeEx">
+            <summary>
+            Portable reflection helpers for <see cref="T:System.Type"/>.
+            </summary>
+        </member>
+        <member name="F:CBdotnet.TypeEx.EmptyTypes">
+            <summary>
+            An empty Type array.
+            </summary>
+        </member>
+        <member name="M:CBdotnet.TypeEx.FindDerivedOrEqualToThisType(System.Type,System.Type)">
+            <summary>
+            Returns the meeting SearchedType in the inheritance path of ObjectType.
+            Returns null of none.
+            Example: FindDerivedOrEqualToThisType(typeof(List&lt;int&gt;),typeof(List&lt;&gt;)) returns typeof(List&lt;int&gt;).
+            </summary>
+            <param name="ObjectType">The type to be analysed.</param>
+            <param name="SearchedType">Searched type. Can be generic with a type (as List&lt;int&gt;) of nothing (as List&lt;&gt;).</param>
+            <returns></returns>
+        </member>
+        <member name="M:CBdotnet.TypeEx.FindDerivedFromThisType(System.Type,System.Type)">
+            <summary>
+            Finds if <paramref name="SearchedType"/> is one of the descendent of <paramref name="TheObjectType"/>. If true, returns <paramref name="SearchedType"/>. If false, returns null.
+            <para>This function is cached.</para>
+            </summary>
+            <param name="TheObjectType"></param>
+            <param name="SearchedType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CBdotnet.TypeEx.GetAssembly(System.Type)">
+            <summary>
+            (Chris)
+            Donne l'assemblage contenant ce type.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CBdotnet.TypeEx.GetConstructor(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Type[],System.Reflection.ParameterModifier[])">
+            <summary>
+            Finds the right constructor of this <paramref name="type"/>.
+            </summary>
+            <param name="type"></param>
+            <param name="bindingAttr"></param>
+            <param name="binder"></param>
+            <param name="types"></param>
+            <param name="modifiers"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CBdotnet.TypeEx.GetCustomAttributeByType``1(System.Reflection.MemberInfo,System.Boolean)">
+            <summary>
+            (Chris)
+            Équivalent à (T)memberInfo.GetCustomAttribute(typeof(T));
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="info"></param>
+            <param name="inherit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CBdotnet.TypeEx.Assembly(System.Type)">
+            <summary>
+            Gets the <see cref="T:System.Reflection.Assembly"/> in which the type is declared. For generic types, gets the <see cref="T:System.Reflection.Assembly"/> in which the generic type is defined.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CBdotnet.TypeEx.BaseType(System.Type)">
+            <summary>
+            Gets the type from which the current <see cref="T:System.Type"/> directly inherits.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CBdotnet.TypeEx.BaseTypes(System.Type)">
+            <summary>
+            Renvoie toute la parentée de ce type.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CBdotnet.TypeEx.ContainsGenericParameters(System.Type)">
+            <summary>
+            Gets a value indicating whether the current <see cref="T:System.Type"/> object has type parameters that have not been replaced by specific types.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CBdotnet.TypeEx.GUID(System.Type)">
+            <summary>
+            Gets the GUID associated with the <see cref="T:System.Type"/>.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CBdotnet.TypeEx.IsClass(System.Type)">
+            <summary>
+            Gets a value indicating whether the <see cref="T:System.Type"/> is a class or a delegate; that is, not a value type or interface.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CBdotnet.TypeEx.GetValueOfNonIndexed(System.Reflection.PropertyInfo,System.Object)">
+            <summary>
+            (Chris)
+            Donne la valeur d'une propriété non-indexée.
+            </summary>
+            <param name="pi"></param>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CBdotnet.TypeEx.GetValueOfStaticNonIndexed(System.Reflection.PropertyInfo)">
+            <summary>
+            Gets the value of a static and non-indexed property.
+            </summary>
+            <param name="pi"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CBdotnet.TypeEx.IsEnum(System.Type)">
+            <summary>
+            Gets a value indicating whether the current <see cref="T:System.Type"/> represents an enumeration.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CBdotnet.TypeEx.IsGenericType(System.Type)">
+            <summary>
+            Gets a value indicating whether the current type is a generic type.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CBdotnet.TypeEx.IsGenericTypeDefinition(System.Type)">
+            <summary>
+            Gets a value indicating whether the current <see cref="T:System.Type"/> represents a generic type definition, from which other generic types can be constructed.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CBdotnet.TypeEx.IsInterface(System.Type)">
+            <summary>
+            Gets a value indicating whether the <see cref="T:System.Type"/> is an interface; that is, not a class or a value type.
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CBdotnet.TypeEx.IsValueType(System.Type)">
+            <summary>
+            Gets a value indicating whether the <see cref="T:System.Type"/> is a value type (that is, a structure).
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CBdotnet.TypeEx.IsDerivedFromThisType(System.Type,System.Type)">
+            <summary>
+            Finds if <paramref name="SearchedType"/> is one of the descendent of <paramref name="ObjectType"/>.
+            <para>This function is cached.</para>
+            </summary>
+            <param name="ObjectType"></param>
+            <param name="SearchedType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CBdotnet.TypeEx.IsDerivedOrEqualToThisType(System.Type,System.Type)">
+            <summary>
+            Finds if <paramref name="SearchedType"/> is one of the descendent of <paramref name="ObjectType"/>, or is the same type.
+            <para>This function is cached.</para>
+            </summary>
+            <param name="ObjectType"></param>
+            <param name="SearchedType"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CB Helpers WPF</name>
+    </assembly>
+    <members>
+        <member name="T:CB.Graphics.GraphicsExtensions">
+            <summary>
+            Helpers for graphic classes.
+            </summary>
+        </member>
+        <member name="M:CB.Graphics.GraphicsExtensions.SetPixelFormat(System.Windows.Media.Imaging.BitmapSource,System.Windows.Media.PixelFormat)">
+            <summary>
+            Returns an image with the right pixel format.
+            </summary>
+            <param name="image"></param>
+            <param name="format"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CB.WPF.ClipboardImage">
+            <summary>
+            Helpers for images in the clipboard.
+            </summary>
+        </member>
+        <member name="M:CB.WPF.ClipboardImage.ImageFromClipboardDib">
+            <summary>
+            Gets the image in the Clipboard.
+            Fixes a defect in Clipboard.GetImage().
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CB.WPF.Images">
+            <summary>
+            Helpers for images.
+            </summary>
+        </member>
+        <member name="M:CB.WPF.Images.SetImageDisplaySize(System.Windows.Media.Visual,System.Windows.Controls.Image,System.Double,System.Double)">
+            <summary>
+            Adapts the displayed image size to the DPI setting of the screen in Windows.
+            </summary>
+            <param name="window"></param>
+            <param name="image"></param>
+            <param name="width"></param>
+            <param name="height"></param>
+        </member>
+        <member name="T:CB.Xaml.BindingHelper">
+            <summary>
+            Helpers for Bindings.
+            </summary>
+        </member>
+        <member name="M:CB.Xaml.BindingHelper.GetValue(System.Windows.Data.BindingBase,System.Object@)">
+            <summary>
+            CB: Evaluates the binding value.
+            </summary>
+            <param name="b"></param>
+            <param name="ret"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Xaml.BindingHelper.GetValue``1(System.Windows.Data.BindingBase,``0@)">
+            <summary>
+            CB: Evaluates the binding value.
+            </summary>
+            <param name="b"></param>
+            <param name="ret"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Xaml.RichText">
+            <summary>
+            Equivalent to RichTextBlock in Store XAML, but done by RichTextBox in WPF.
+            </summary>
+        </member>
+        <member name="P:CB.Xaml.RichText.Blocks">
+            <summary>
+            Gets the top-level System.Windows.Documents.Block elements of the contents of the System.Windows.Documents.FlowDocument.
+            </summary>
+        </member>
+        <member name="M:CB.Xaml.RichText.#ctor">
+            <summary>
+            Initializes with a new <see cref="T:System.Windows.Documents.FlowDocument"/>.
+            </summary>
+        </member>
+        <member name="T:CB.Xaml.XamlHelper">
+            <summary>
+            Helpers for XAML.
+            </summary>
+        </member>
+        <member name="M:CB.Xaml.XamlHelper.GetChildrenObjects(System.Windows.FrameworkElement)">
+            <summary>
+            CB: Obtains the sub-objects of this control.
+            <para>Returns null if there is no sub-controls.</para>
+            </summary>
+            <param name="control"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Xaml.XamlHelper.GetChildrenControls(System.Windows.FrameworkElement)">
+            <summary>
+            CB: Obtains the sub-controls of this control.
+            <para>Returns null if there is no sub-controls.</para>
+            </summary>
+            <param name="control"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Xaml.XamlHelper.GetRootControl(System.Windows.FrameworkElement,System.Boolean)">
+            <summary>
+            CB: Obtains the control at the top or the control tree.
+            </summary>
+            <param name="control"></param>
+            <param name="checkIsLoaded">If true, checks that all control are loaded.
+            <para>When a control is not loaded, its Parent is probably null.</para>
+            </param>
+            <returns></returns>
+        </member>
+        <member name="P:CB.Xaml.XamlHelper.IsXamlDesignerRunning">
+            <summary>
+            Tells if the IDE's Xaml visual designer is running the executing assembly.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CB.Xaml.XamlHelper.XamlRoutedEventHandler`1">
+            <summary>
+            An event handler for XAML.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="control"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:CB.Xaml.XamlHelper.Loaded_InterceptAndManageExceptions``1(``0,CB.Xaml.XamlHelper.XamlRoutedEventHandler{``0})">
+            <summary>
+            CB: Gets a Loaded event that manages Exceptions even on 64-bit operating systems.
+            <para>The problem with Loaded event is it does not let catch an exception on 64-bit systems.</para>
+            <para>If the control is a Window, please consider using ContentRendered instead.</para>
+            <para>You can consider overriding EndInit too, as it is called after properties initialization by the xaml designer (XDesProc.exe).</para>
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="control"></param>
+            <param name="handler"></param>
+        </member>
+        <member name="M:CB.Xaml.XamlHelper.TraverseTheControlTree(System.Windows.FrameworkElement,System.Func{System.Windows.FrameworkElement,System.Boolean},System.Boolean)">
+            <summary>
+            CB: Traverses the entire control tree below this control.
+            </summary>
+            <param name="control"></param>
+            <param name="traverser">Returns true to end the travel.</param>
+            <param name="includesThisControl"></param>
+        </member>
+        <member name="M:CB.Xaml.XamlHelper.GetControlText(System.Windows.FrameworkElement)">
+            <summary>
+            CB: Gets the text of this control, whatever type is the control.
+            </summary>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Xaml.XamlHelper.GetItemText(System.Windows.Controls.ItemsControl,System.Object)">
+            <summary>
+            CB: Gets the text of this item control/object, whatever type is the control.
+            </summary>
+            <param name="itemsControl"></param>
+            <param name="item"></param>
+            <returns></returns>
+        </member>
+        <member name="T:CB_Helpers_WPF.Properties.Resources">
+            <summary>
+              Une classe de ressource fortement typée destinée, entre autres, à la consultation des chaînes localisées.
+            </summary>
+        </member>
+        <member name="P:CB_Helpers_WPF.Properties.Resources.ResourceManager">
+            <summary>
+              Retourne l'instance ResourceManager mise en cache utilisée par cette classe.
+            </summary>
+        </member>
+        <member name="P:CB_Helpers_WPF.Properties.Resources.Culture">
+            <summary>
+              Remplace la propriété CurrentUICulture du thread actuel pour toutes
+              les recherches de ressources à l'aide de cette classe de ressource fortement typée.
+            </summary>
+        </member>
+    </members>
+</doc>

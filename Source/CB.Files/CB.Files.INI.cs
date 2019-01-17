@@ -3,8 +3,11 @@
 // https://github.com/ChrisBertrandDotNet/CB-Helpers
 // https://chrisbertrand.net
 
-// Inspired by http://bytes.com/topic/net/insights/797169-reading-parsing-ini-file-c
-// But with many changes.
+// Manages INI files for settings.
+
+// TODO: make concurrent.
+// TODO: add tests.
+// TODO: clean code.
 
 using System;
 using System.Collections;
@@ -18,7 +21,7 @@ using System.Text;
     {
         public static void Main()
         {
-            IniParser parser = new IniParser(@"C:\test.ini");
+            var parser = new IniParser(@"C:\test.ini");
      
             String newMessage;
      
@@ -26,9 +29,7 @@ using System.Text;
             newMessage += parser.GetSetting("appsettings", "msgpart2");
             newMessage += parser.GetSetting("punctuation", "ex");
      
-            //Returns "Hello World!"
             Console.WriteLine(newMessage);
-            Console.ReadLine();
         }
     }
 */
@@ -36,27 +37,99 @@ using System.Text;
 namespace CB.Files
 {
 
+	/// <summary>
+	/// Manages INI files for settings.
+	/// <para>Please note this class is *not* thread-safe at the moment.</para>
+	/// </summary>
 	public class IniParser
 	{
-		internal readonly Dictionary<SectionPair, string> keyPairs = new Dictionary<SectionPair, string>();
-		private readonly String iniFilePath;
-		public readonly bool SetUpperCase;
+		/// <summary>
+		/// All settings. Key is {section name, setting name}. Value is setting value.
+		/// </summary>
+		internal readonly Dictionary<SectionPair, string> settings;
 
+		private readonly String iniFilePath;
+		/// <summary>
+		/// Ignores characters' upper/lower case.
+		/// </summary>
+		public readonly bool IgnoreCase;
+		/// <summary>
+		/// Comparer for section and setting names.
+		/// </summary>
+		readonly StringComparison NameComparer;
+
+		const string RootName = "ROOT";
+
+		/// <summary>
+		/// Section name and setting name.
+		/// Note: does not contain the setting value (it is in <see cref="settings"/>).
+		/// </summary>
 		internal struct SectionPair
 		{
-			internal String Section;
-			internal String Key;
+			/// <summary>
+			/// The section name.
+			/// </summary>
+			internal String SectionName;
+			/// <summary>
+			/// The setting name.
+			/// </summary>
+			internal String SettingName;
 #if DEBUG
 			public override string ToString()
 			{
-				return "[" + this.Section + "] : " + this.Key;
+				return string.Format("[{0}] : {1} = ..", this.SectionName, this.SettingName);
 			}
 #endif
+			public override int GetHashCode()
+			{
+				return this.SectionName.GetHashCode() ^ this.SettingName.GetHashCode();
+			}
 		}
 
-		private IniParser(bool SetUpperCase = true)
+		/// <summary>
+		/// Compares section names and setting names.
+		/// </summary>
+		class SectionPairNameComparer : IEqualityComparer<SectionPair>
 		{
-			this.SetUpperCase = SetUpperCase;
+			readonly IEqualityComparer<string> NameComparer;
+
+			internal SectionPairNameComparer(IEqualityComparer<string> nameComparer)
+			{ this.NameComparer = nameComparer; }
+
+			public bool Equals(SectionPair x, SectionPair y)
+			{
+				return this.NameComparer.Equals(x.SectionName, y.SectionName)
+					&& this.NameComparer.Equals(x.SettingName, y.SettingName);
+			}
+
+			public int GetHashCode(SectionPair obj)
+			{
+				return obj.GetHashCode();
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="ignoreCase">If true, compare names by ignoring character case.</param>
+		/// <param name="compareNamesByCurrentCulture">If true, compare names using the current culture. If false, compare using the invariant culture.</param>
+		IniParser(bool ignoreCase, bool compareNamesByCurrentCulture)
+		{
+			IEqualityComparer<string> ecs;
+			switch (ignoreCase)
+			{
+				case false:
+					this.NameComparer = compareNamesByCurrentCulture ? StringComparison.CurrentCulture : StringComparison.InvariantCulture;
+					ecs = compareNamesByCurrentCulture ? StringComparer.CurrentCulture : StringComparer.InvariantCulture;
+					break;
+				default:
+					this.NameComparer = compareNamesByCurrentCulture ? StringComparison.CurrentCultureIgnoreCase : StringComparison.InvariantCultureIgnoreCase;
+					ecs = compareNamesByCurrentCulture ? StringComparer.CurrentCultureIgnoreCase : StringComparer.InvariantCultureIgnoreCase;
+					break;
+			}
+			this.IgnoreCase = ignoreCase;
+
+			this.settings = new Dictionary<SectionPair, string>(new SectionPairNameComparer(ecs));
 		}
 
 		/// <summary>
@@ -65,9 +138,10 @@ namespace CB.Files
 		/// </summary>
 		/// <param name="IniFilePath">Full path to INI file.</param>
 		/// <param name="encoding"></param>
-		/// <param name="SetUpperCase"></param>
-		public IniParser(String IniFilePath, Encoding encoding = null, bool SetUpperCase = true)
-			: this(SetUpperCase)
+		/// <param name="ignoreCase">If true, compare names by ignoring character case.</param>
+		/// <param name="compareNamesByCurrentCulture">If true, compare names using the current culture. If false, compare using the invariant culture.</param>
+		public IniParser(String IniFilePath, Encoding encoding = null, bool ignoreCase = true, bool compareNamesByCurrentCulture = false)
+			: this(ignoreCase, compareNamesByCurrentCulture)
 		{
 			this.iniFilePath = IniFilePath;
 
@@ -84,8 +158,15 @@ namespace CB.Files
 		/// <summary>
 		/// Parses the stream and enumerates the values.
 		/// </summary>
-		public IniParser(Stream stream, Encoding encoding = null, bool SetUpperCase = true, bool DisposeStream = false)
+		/// <param name="stream">The stream that stores the INI settings.</param>
+		/// <param name="encoding"></param>
+		/// <param name="ignoreCase">If true, compare names by ignoring character case.</param>
+		/// <param name="compareNamesByCurrentCulture">If true, compare names using the current culture. If false, compare using the invariant culture.</param>
+		public IniParser(Stream stream, Encoding encoding = null, bool ignoreCase = true, bool compareNamesByCurrentCulture = false)
+	//, bool DisposeStream = false)
+	: this(ignoreCase, compareNamesByCurrentCulture)
 		{
+
 			List<string> lines = new List<string>();
 			using (var tr = new StreamReader(stream, encoding))
 			{
@@ -175,10 +256,12 @@ namespace CB.Files
 		/// Parses a text that contains the INI lines.
 		/// <para>Example: IniAsText = "[A] \n B=1"</para>
 		/// </summary>
-		/// <param name="SetUpperCase"></param>
-		public static IniParser ParseText(string IniAsText, bool SetUpperCase = true) // Chris
+		/// <param name="IniAsText">This text contains the entire INI 'file'.</param>
+		/// <param name="ignoreCase">If true, compare names by ignoring character case.</param>
+		/// <param name="compareNamesByCurrentCulture">If true, compare names using the current culture. If false, compare using the invariant culture.</param>
+		public static IniParser ParseText(string IniAsText, bool ignoreCase = true, bool compareNamesByCurrentCulture = false)
 		{
-			var iniParser = new IniParser(SetUpperCase);
+			var iniParser = new IniParser(ignoreCase, compareNamesByCurrentCulture);
 			iniParser.ParseText(IniAsText);
 			return iniParser;
 		}
@@ -224,15 +307,15 @@ namespace CB.Files
 							String value = null;
 
 							if (currentRoot == null)
-								currentRoot = "ROOT";
+								currentRoot = RootName;
 
-							sectionPair.Section = SetUpperCase ? currentRoot.ToUpper() : currentRoot;
-							sectionPair.Key = SetUpperCase ? keyPair[0].ToUpper() : keyPair[0];
+							sectionPair.SectionName = currentRoot;
+							sectionPair.SettingName = keyPair[0];
 
 							if (keyPair.Length > 1)
 								value = keyPair[1];
 
-							keyPairs.Add(sectionPair, value);
+							settings.Add(sectionPair, value);
 						}
 					}
 				}
@@ -248,12 +331,12 @@ namespace CB.Files
 		public String GetSetting(String sectionName, String settingName)
 		{
 			SectionPair sectionPair;
-			sectionPair.Section = SetUpperCase ? sectionName.ToUpper() : sectionName;
-			sectionPair.Key = SetUpperCase ? settingName.ToUpper() : settingName;
+			sectionPair.SectionName = sectionName;
+			sectionPair.SettingName = settingName;
 
 			try
 			{
-				return (String)keyPairs[sectionPair];
+				return (String)settings[sectionPair];
 			}
 			catch { return null; }
 		}
@@ -267,10 +350,10 @@ namespace CB.Files
 		{
 			ArrayList tmpArray = new ArrayList();
 
-			foreach (SectionPair pair in keyPairs.Keys)
+			foreach (SectionPair pair in settings.Keys)
 			{
-				if (pair.Section == (SetUpperCase ? sectionName.ToUpper() : sectionName))
-					tmpArray.Add(pair.Key);
+				if (pair.SectionName.Equals(sectionName, this.NameComparer))
+					tmpArray.Add(pair.SettingName);
 			}
 
 			return (String[])tmpArray.ToArray(typeof(String));
@@ -281,17 +364,22 @@ namespace CB.Files
 		/// Progressif avec un 'yield', pour les foreach.
 		/// </summary>
 		/// <param name="sectionName">Section to enum.</param>
-		public IEnumerator<string> EnumèreSection(String sectionName)
+		public IEnumerator<string> SectionEnumerator(String sectionName)
 		{
-			foreach (SectionPair pair in keyPairs.Keys)
+			foreach (SectionPair pair in settings.Keys)
 			{
-				if (pair.Section == (SetUpperCase ? sectionName.ToUpper() : sectionName))
-					yield return pair.Key;
+				if (pair.SectionName.Equals(sectionName, this.NameComparer))
+					yield return pair.SettingName;
 			}
+		}
+		[Obsolete("Use SectionEnumerator.")]
+		internal IEnumerator<string> EnumèreSection(String sectionName)
+		{
+			return this.SectionEnumerator(sectionName);
 		}
 
 		/// <summary>
-		/// Adds or replaces a setting to the table to be saved.
+		/// Adds or updates a setting to the table to be saved.
 		/// </summary>
 		/// <param name="sectionName">Section to add under.</param>
 		/// <param name="settingName">Key name to add.</param>
@@ -299,17 +387,17 @@ namespace CB.Files
 		public void AddSetting(String sectionName, String settingName, String settingValue)
 		{
 			SectionPair sectionPair;
-			sectionPair.Section = SetUpperCase ? sectionName.ToUpper() : sectionName;
-			sectionPair.Key = SetUpperCase ? settingName.ToUpper() : settingName;
+			sectionPair.SectionName = sectionName;
+			sectionPair.SettingName = settingName;
 
-			if (keyPairs.ContainsKey(sectionPair))
-				keyPairs.Remove(sectionPair);
+			if (settings.ContainsKey(sectionPair))
+				settings.Remove(sectionPair);
 
-			keyPairs.Add(sectionPair, settingValue);
+			settings.Add(sectionPair, settingValue);
 		}
 
 		/// <summary>
-		/// Adds or replaces a setting to the table to be saved with a null value.
+		/// Adds or updates a setting to the table to be saved with a null value.
 		/// </summary>
 		/// <param name="sectionName">Section to add under.</param>
 		/// <param name="settingName">Key name to add.</param>
@@ -326,11 +414,11 @@ namespace CB.Files
 		public void DeleteSetting(String sectionName, String settingName)
 		{
 			SectionPair sectionPair;
-			sectionPair.Section = SetUpperCase ? sectionName.ToUpper() : sectionName;
-			sectionPair.Key = SetUpperCase ? settingName.ToUpper() : settingName;
+			sectionPair.SectionName = sectionName;
+			sectionPair.SettingName = settingName;
 
-			if (keyPairs.ContainsKey(sectionPair))
-				keyPairs.Remove(sectionPair);
+			if (settings.ContainsKey(sectionPair))
+				settings.Remove(sectionPair);
 		}
 
 		/// <summary>
@@ -343,26 +431,26 @@ namespace CB.Files
 			String tmpValue = "";
 			String strToSave = "";
 
-			foreach (SectionPair sectionPair in keyPairs.Keys)
+			foreach (SectionPair sectionPair in settings.Keys)
 			{
-				if (!sections.Contains(sectionPair.Section))
-					sections.Add(sectionPair.Section);
+				if (!sections.Contains(sectionPair.SectionName))
+					sections.Add(sectionPair.SectionName);
 			}
 
 			foreach (String section in sections)
 			{
 				strToSave += ("[" + section + "]\r\n");
 
-				foreach (SectionPair sectionPair in keyPairs.Keys)
+				foreach (SectionPair sectionPair in settings.Keys)
 				{
-					if (sectionPair.Section == section)
+					if (sectionPair.SectionName == section)
 					{
-						tmpValue = (String)keyPairs[sectionPair];
+						tmpValue = (String)settings[sectionPair];
 
 						if (tmpValue != null)
 							tmpValue = "=" + tmpValue;
 
-						strToSave += (sectionPair.Key + tmpValue + "\r\n");
+						strToSave += (sectionPair.SettingName + tmpValue + "\r\n");
 					}
 				}
 
@@ -375,9 +463,9 @@ namespace CB.Files
 				tw.Write(strToSave);
 				tw.Close();
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
-				throw ex;
+				throw;
 			}
 			return true;
 		}

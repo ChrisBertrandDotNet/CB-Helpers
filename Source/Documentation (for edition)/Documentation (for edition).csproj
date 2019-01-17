@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{82D0FC7A-B4D5-4BE2-B8DA-516393D8488A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Documentation__for_edition_</RootNamespace>
+    <AssemblyName>Documentation %28for edition%29</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Documentation\CB.Data.Base32.cs.md">
+      <Link>Documents\CB.Data.Base32.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Data.BlockingCollectionAsICollection.cs.md">
+      <Link>Documents\CB.Data.BlockingCollectionAsICollection.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Data.Certify.cs.md">
+      <Link>Documents\CB.Data.Certify.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Data.Comparer.cs.md">
+      <Link>Documents\CB.Data.Comparer.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Data.EmptyArray.cs.md">
+      <Link>Documents\CB.Data.EmptyArray.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Data.EnumHelper.cs.md">
+      <Link>Documents\CB.Data.EnumHelper.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Data.ImmutableDictionary.cs.md">
+      <Link>Documents\CB.Data.ImmutableDictionary.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Data.ImmutableList.cs.md">
+      <Link>Documents\CB.Data.ImmutableList.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Data.NullableAny.cs.md">
+      <Link>Documents\CB.Data.NullableAny.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Data.StringTranscoder.cs.md">
+      <Link>Documents\CB.Data.StringTranscoder.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Execution.Return.cs.md">
+      <Link>Documents\CB.Execution.Return.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Files.cs.md">
+      <Link>Documents\CB.Files.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Files.INI.cs.md">
+      <Link>Documents\CB.Files.INI.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Graphics.GraphicsExtensions.SetPixelFormat.cs.md">
+      <Link>Documents\CB.Graphics.GraphicsExtensions.SetPixelFormat.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Graphics.PixelBGR32.cs.md">
+      <Link>Documents\CB.Graphics.PixelBGR32.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.OperatingSystem.EnvironmentEx.cs.md">
+      <Link>Documents\CB.OperatingSystem.EnvironmentEx.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Parallelism.ConsistentData.cs.md">
+      <Link>Documents\CB.Parallelism.ConsistentData.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Processus.ProcessEx.cs.md">
+      <Link>Documents\CB.Processus.ProcessEx.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Processus.ProcessEx.SetDebugPrivilege.cs.md">
+      <Link>Documents\CB.Processus.ProcessEx.SetDebugPrivilege.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Reflection.MemberInfoOf.cs.md">
+      <Link>Documents\CB.Reflection.MemberInfoOf.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Reflection.NameOf.cs.md">
+      <Link>Documents\CB.Reflection.NameOf.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Reflection.Reflection.cs.md">
+      <Link>Documents\CB.Reflection.Reflection.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Reflection.TypeEx.cs.md">
+      <Link>Documents\CB.Reflection.TypeEx.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Text.StringWithHashCode.cs.md">
+      <Link>Documents\CB.Text.StringWithHashCode.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Text.Unicode.cs.md">
+      <Link>Documents\CB.Text.Unicode.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Validation.ContractConditions.cs.md">
+      <Link>Documents\CB.Validation.ContractConditions.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.WindowsForms.FolderSelectDialog.cs.md">
+      <Link>Documents\CB.WindowsForms.FolderSelectDialog.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.WPF.ClipboardImage.cs.md">
+      <Link>Documents\CB.WPF.ClipboardImage.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.WPF.Image.SetImageDisplaySize.cs.md">
+      <Link>Documents\CB.WPF.Image.SetImageDisplaySize.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Xaml.XamlHelper.cs.md">
+      <Link>Documents\CB.Xaml.XamlHelper.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.XamlCB.Xaml.BindingHelper.cs.md">
+      <Link>Documents\CB.XamlCB.Xaml.BindingHelper.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Xml.AssemblyToXsd.cs.md">
+      <Link>Documents\CB.Xml.AssemblyToXsd.cs.md</Link>
+    </None>
+    <None Include="..\..\Documentation\CB.Xml.XML.cs.md">
+      <Link>Documents\CB.Xml.XML.cs.md</Link>
+    </None>
+    <None Include="..\..\License.md">
+      <Link>Documents\License.md</Link>
+    </None>
+    <None Include="..\..\readme.md">
+      <Link>Documents\readme.md</Link>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="__notes__.md" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -7,6 +7,7 @@ namespace Common
 {
 	internal static class Library
 	{
-		internal const string LibraryVersion = "1.0.0.0";
+		internal const string LibraryVersion = "1.1.0.0";
+		internal const string Company = "Christophe Bertrand. https://chrisbertrand.net";
 	}
 }

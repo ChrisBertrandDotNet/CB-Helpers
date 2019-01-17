@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>CB Helpers dotnet.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>CB Helpers dotnet.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -41,8 +43,86 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\CB.Data\CB.Data.Base32.cs">
+      <Link>CB.Data.Base32.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.Data\CB.Data.BlockingCollectionAsICollection.cs">
+      <Link>CB.Data.BlockingCollectionAsICollection.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.Data\CB.Data.Certify.cs">
+      <Link>CB.Data.Certify.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.Data\CB.Data.Comparer.cs">
+      <Link>CB.Data.Comparer.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.Data\CB.Data.EmptyArray.cs">
+      <Link>CB.Data.EmptyArray.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.Data\CB.Data.EnumHelper.cs">
+      <Link>CB.Data.EnumHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.Data\CB.Data.ImmutableDictionary.cs">
+      <Link>CB.Data.ImmutableDictionary.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.Data\CB.Data.ImmutableList.cs">
+      <Link>CB.Data.ImmutableList.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.Data\CB.Data.NullableAny.cs">
+      <Link>CB.Data.NullableAny.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.Data\CB.Data.StringTranscoder.cs">
+      <Link>CB.Data.StringTranscoder.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.Execution\CB.Execution.Return.cs">
+      <Link>CB.Execution.Return.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.Files\CB.Files.cs">
+      <Link>CB.Files.cs</Link>
+    </Compile>
     <Compile Include="..\CB.Files\CB.Files.INI.cs">
       <Link>CB.Files.INI.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.Graphics\CB.Graphics.PixelBGR32.cs">
+      <Link>CB.Graphics.PixelBGR32.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.OperatingSystem\CB.OperatingSystem.EnvironmentEx.cs">
+      <Link>CB.OperatingSystem.EnvironmentEx.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.Parallelism\CB.Parallelism.ConsistentData.cs">
+      <Link>CB.Parallelism.ConsistentData.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.Processus\CB.Processus.ProcessEx.cs">
+      <Link>CB.Processus.ProcessEx.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.Processus\CB.Processus.ProcessEx.SetDebugPrivilege.cs">
+      <Link>CB.Processus.ProcessEx.SetDebugPrivilege.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.Reflection\CB.Reflection.MemberInfoOf.cs">
+      <Link>CB.Reflection.MemberInfoOf.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.Reflection\CB.Reflection.NameOf.cs">
+      <Link>CB.Reflection.NameOf.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.Reflection\CB.Reflection.Reflection.cs">
+      <Link>CB.Reflection.Reflection.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.Reflection\CB.Reflection.TypeEx.cs">
+      <Link>CB.Reflection.TypeEx.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.Text\CB.Text.StringWithHashCode.cs">
+      <Link>CB.Text.StringWithHashCode.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.Text\CB.Text.Unicode.cs">
+      <Link>CB.Text.Unicode.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.Validation\CB.Validation.ContractConditions.cs">
+      <Link>CB.Validation.ContractConditions.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.Xml\CB.Xml.AssemblyToXsd.cs">
+      <Link>CB.Xml.AssemblyToXsd.cs</Link>
+    </Compile>
+    <Compile Include="..\CB.Xml\CB.Xml.XML.cs">
+      <Link>CB.Xml.XML.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
