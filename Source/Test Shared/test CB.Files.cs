@@ -11,9 +11,10 @@ public partial class TestHelpers
 	{
 		#region ExistingDirectory
 
-		const string winDir= @"c:\Windows";
+		string winDir = System.Environment.SystemDirectory;// ex: @""C:\WINDOWS\system32"";
+		Release.Assert(!string.IsNullOrEmpty(winDir));
 		var w1 = new ExistingDirectory(winDir); // Throws an exception if the directory does not exists.
-		var w2 = ExistingDirectory.GetDirectory(winDir); // returns null if the directory does not exists.
+		Release.Assert(ExistingDirectory.GetDirectory(winDir) != null); // returns null if the directory does not exists.
 
 		#endregion ExistingDirectory
 	}

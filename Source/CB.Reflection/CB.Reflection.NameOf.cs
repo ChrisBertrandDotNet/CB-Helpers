@@ -12,7 +12,7 @@ using System.Linq.Expressions;
 namespace CB.Reflection
 {
 	/// <summary>	
-	/// Similar to 'nameof' in C# ≤ 5 (and VS ≤ 2013).
+	/// Similar to 'nameof', but works in C# ≤ 5 (and VS ≤ 2013).
 	/// Note: These functions use reflection, therefore are much slower than 'nameof'.
 	/// </summary>
 	public static class NameOf

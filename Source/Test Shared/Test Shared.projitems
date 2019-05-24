@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>62a7e845-aac8-4339-9fd1-7dd6506eb82b</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Test_Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Program.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Release checks.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)test CB.Data.Certify.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)test CB.Data.NullableAny.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)test CB.Execution.Return.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)test CB.Files.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)test CB.Parallelism.ConsistentData.cs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)test CB.Parallelism.PositionList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)test CB.Reflection.MemberInfoOf.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)test CB.Text.StringWithHashCode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)test CB.Validation.ContractConditions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)test CB.Xml.AssemblyToXsd.cs" />
+  </ItemGroup>
+</Project>

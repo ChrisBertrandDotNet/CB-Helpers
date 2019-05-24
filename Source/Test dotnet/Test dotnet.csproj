@@ -42,17 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="test CB.Execution.Return.cs" />
-    <Compile Include="test CB.Data.Certify.cs" />
-    <Compile Include="test CB.Data.NullableAny.cs" />
-    <Compile Include="test CB.Xml.AssemblyToXsd.cs" />
-    <Compile Include="test CB.Validation.ContractConditions.cs" />
-    <Compile Include="test CB.Files.cs" />
-    <Compile Include="test CB.Reflection.MemberInfoOf.cs" />
-    <Compile Include="test CB.Parallelism.ConsistentData.cs.cs" />
-    <Compile Include="test CB.Text.StringWithHashCode.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -64,5 +54,6 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="..\Common\Common.projitems" Label="Shared" />
+  <Import Project="..\Test Shared\Test Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

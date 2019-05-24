@@ -11,25 +11,13 @@ public partial class TestHelpers
 
 	public void Test_CB_Execution_Return_cs()
 	{
-		var a = this.Sqrt(0.0);
-		switch (a.ErrorCode)
-		{
-			case ReturnSuccess.ArgumentOutOfRange:
-				a = -1; break;
-		}
+		Release.Assert(this.Sqrt(-1.0).ErrorCode == ReturnSuccess.ArgumentOutOfRange);
 
-		var e = this.DisplayLine(100);
-		if (e == ReturnSuccess.ArgumentOutOfRange)
-			System.Diagnostics.Debugger.Break();
+		Release.Assert(this.DisplayLine(100) == ReturnSuccess.Success);
 
-		var s = CertifiesStringIsDefined("good");
-		switch (s.ErrorCode)
-		{
-			case MyErrorCodes.StringIsEmpty:
-				s = "!Empty!"; break;
-			case MyErrorCodes.StringIsNull:
-				s = "!Null!"; break;
-		}
+		Release.Assert(CertifiesStringIsDefined(null).ErrorCode == MyErrorCodes.StringIsNull);
+		Release.Assert(CertifiesStringIsDefined(string.Empty).ErrorCode == MyErrorCodes.StringIsEmpty);
+		Release.Assert(CertifiesStringIsDefined("good").ErrorCode == MyErrorCodes.Success);
 
 	}
 

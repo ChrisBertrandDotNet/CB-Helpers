@@ -164,7 +164,7 @@ using CBdotnet.Test;
 #endif
 using CB.Data;
 using CB.Validation;
-using CBdotnet;
+using CB.Reflection;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -476,13 +476,13 @@ namespace CB.Execution
 
 		static Dictionary<ReturnSuccess, Type> _GetCorrespondenceErrorToException()
 		{
-			// initialise les correspondances entre ReturnSuccess et Exception:
+			// initializes correspondences between ReturnSuccess and Exception:
 			var t = typeof(ReturnSuccess);
 			var valeurs = t.GetFields().Where(champ => champ.FieldType == t).ToArray();
 			var c = new Dictionary<ReturnSuccess, Type>(valeurs.Length);
 			foreach (var v in valeurs)
 			{
-				var at = v.GetCustomAttributeByType<CorrespondingExceptionAttribute>();// v.GetCustomAttribute(typeof(CorrespondingExceptionAttribute));
+				var at = v.GetCustomAttributeByType<CorrespondingExceptionAttribute>();
 				if (at != null)
 				{
 					var a = (CorrespondingExceptionAttribute)at;
@@ -500,7 +500,7 @@ namespace CB.Execution
 			foreach (var ec in c)
 			{
 				if (!c2.ContainsKey(ec.Value))
-					c2.Add(ec.Value, ec.Key); // on inverse.
+					c2.Add(ec.Value, ec.Key); // reverses.
 			}
 			return c2;
 		}
@@ -589,8 +589,7 @@ namespace CB.Execution
 		/// <returns></returns>
 		public static Type ExceptionTypeOfError(ReturnSuccess error)
 		{
-			Type e;
-			if (CorrespondenceErrorToException.TryGetValue(error, out e))
+			if (CorrespondenceErrorToException.TryGetValue(error, out Type e))
 				return e;
 			return null;
 		}
@@ -603,8 +602,7 @@ namespace CB.Execution
 		/// <returns></returns>
 		public static ReturnSuccess ErrorOfException(Exception exception)
 		{
-			ReturnSuccess r;
-			if (CorrespondenceExceptionToError.TryGetValue(exception.GetType(), out r))
+			if (CorrespondenceExceptionToError.TryGetValue(exception.GetType(), out ReturnSuccess r))
 				return r;
 			throw exception;
 		}
@@ -617,8 +615,7 @@ namespace CB.Execution
 		/// <returns></returns>
 		public static ReturnSuccess ErrorOfExceptionOrDefault(Exception exception)
 		{
-			ReturnSuccess r;
-			if (CorrespondenceExceptionToError.TryGetValue(exception.GetType(), out r))
+			if (CorrespondenceExceptionToError.TryGetValue(exception.GetType(), out ReturnSuccess r))
 				return r;
 			return ReturnSuccess.Fail;
 		}
@@ -668,9 +665,9 @@ namespace CB.Execution
 #endif
 	{
 		[Obfuscation(Exclude = true)]
-		public static readonly E SuccessCode = checkTypeE(créeVal((int)ReturnSuccess.Success));
+		public static readonly E SuccessCode = CheckTypeE(CreateVal((int)ReturnSuccess.Success));
 		[Obfuscation(Exclude = true)]
-		public static readonly E NotInitializedCode = créeVal((int)ReturnSuccess.Reserved_NotInitialized);
+		public static readonly E NotInitializedCode = CreateVal((int)ReturnSuccess.Reserved_NotInitialized);
 
 		/// <summary>
 		/// Effectue des vérifications sur le type E.
@@ -678,7 +675,7 @@ namespace CB.Execution
 		/// </summary>
 		/// <param name="code"></param>
 		/// <returns></returns>
-		static E checkTypeE(E code)
+		static E CheckTypeE(E code)
 		{
 			if (typeof(E) != typeof(int))
 			{
@@ -709,7 +706,7 @@ namespace CB.Execution
 #endif
 		}
 
-		static E créeVal(int c)
+		static E CreateVal(int c)
 		{
 			var t = typeof(E);
 			if (!t.IsEnum())
@@ -1525,7 +1522,7 @@ errorCode.ToInt32(null)
 		readonly T _Value;
 
 		/// <summary>
-		/// The current state: NotInitialized, Success or Error.
+		/// Current state: NotInitialized, Success or Error.
 		/// </summary>
 		public ReturnState State
 		{
@@ -1546,7 +1543,7 @@ errorCode.ToInt32(null)
 		[DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		readonly ReturnSuccess _ErrorCode;
 		/// <summary>
-		/// The error code.
+		/// Error code.
 		/// </summary>
 		public ReturnSuccess ErrorCode
 		{ get { return this._ErrorCode; } }
@@ -1563,7 +1560,7 @@ errorCode.ToInt32(null)
 		}
 
 		/// <summary>
-		/// Initialises with an error code.
+		/// Initializes with an error code.
 		/// </summary>
 		/// <param name="errorCode"></param>
 		/// <exception cref="System.ArgumentException">Given error code is a success code. This constructor needs an error code.</exception>

@@ -97,8 +97,12 @@ Helpers for XML files.
 
 ## Release notes
 
-Version 1.1
+Version 1.2
 2019-01-xx
+- xxx
+
+Version 1.1
+2019-01-17
 - Many files added. Most are still quite simple.
 - Every code file is paired with a markdown documentation file.
 

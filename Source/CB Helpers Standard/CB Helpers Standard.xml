@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>CB Helpers dotnet</name>
+        <name>CB Helpers Standard</name>
     </assembly>
     <members>
         <member name="T:CB.Data.ClearBase32">
@@ -3720,27 +3720,6 @@
             <exception cref="T:System.ArgumentNullException">The <paramref name="psi"/> parameter is null.</exception>
             <exception cref="T:System.ObjectDisposedException">The process object has already been disposed.</exception>
             <exception cref="T:System.IO.FileNotFoundException">The file specified in the startInfo parameter's System.Diagnostics.ProcessStartInfo.FileName property could not be found.</exception>
-        </member>
-        <member name="M:CB.Processus.ProcessEx.SetDebugPrivilege">
-            <summary>
-            Obtains Debug privilege for the current process.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="F:CB.Processus.NativeStructures.PrivilegeAttributes.Disabled">
-            <summary>Privilege is disabled.</summary>
-        </member>
-        <member name="F:CB.Processus.NativeStructures.PrivilegeAttributes.EnabledByDefault">
-            <summary>Privilege is enabled by default.</summary>
-        </member>
-        <member name="F:CB.Processus.NativeStructures.PrivilegeAttributes.Enabled">
-            <summary>Privilege is enabled.</summary>
-        </member>
-        <member name="F:CB.Processus.NativeStructures.PrivilegeAttributes.Removed">
-            <summary>Privilege is removed.</summary>
-        </member>
-        <member name="F:CB.Processus.NativeStructures.PrivilegeAttributes.UsedForAccess">
-            <summary>Privilege used to gain access to an object or service.</summary>
         </member>
         <member name="T:CB.Reflection.MemberInfoOf">
             <summary>

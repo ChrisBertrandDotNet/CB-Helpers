@@ -95,8 +95,17 @@ namespace CB.Xml
 								bool addThisType = typeFilter != null ? typeFilter(type) : true;
 								if (addThisType)
 								{
-									XmlTypeMapping xmlTypeMapping = xmlReflectionImporter.ImportTypeMapping(type);
-									xmlSchemaExporter.ExportTypeMapping(xmlTypeMapping);
+									XmlTypeMapping xmlTypeMapping = null;
+									try
+									{
+										xmlTypeMapping = xmlReflectionImporter.ImportTypeMapping(type);
+									}
+									catch
+									{
+										outputMessages.Add($"Can not import type {type.FullName}");
+									}
+									if (xmlTypeMapping != null)
+										xmlSchemaExporter.ExportTypeMapping(xmlTypeMapping);
 								}
 							}
 						}

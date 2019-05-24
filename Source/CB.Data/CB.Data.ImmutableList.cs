@@ -8,7 +8,9 @@
  */
 
 /* Requires:
- * CB.Data.EmptyArray.cs
+. CB.Data\CB.Data.EmptyArray.cs
+. CB.Data\CB.Data.EnumHelper.cs
+
 */
 
 using System;

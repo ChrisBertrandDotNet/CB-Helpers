@@ -23,7 +23,7 @@ XAML: xmlns:cbxaml="clr-namespace:CB.Xaml"
 #define WINDOWS_8_STORE // Windows 8, mais non Windows 10.
 #endif
 #if !WPF && !ANDROID && !NETFX_CORE && !WINDOWS_APP && !WINDOWS_PHONE_APP && !WINDOWS_UWP
-#error Il faut définir un type d'IUG, probablement WPF (symbole de compilation conditionnelle)
+#error You have to define a conditional compilation symbol in your project settings (section Build), probably WPF.
 #endif
 
 using System;
@@ -50,6 +50,8 @@ using Windows.UI.Xaml.Media;
 
 // The following line lets you display an XAML without prefix (but compilation does not accecpt that):
 //[assembly: System.Windows.Markup.XmlnsDefinition("http://schemas.microsoft.com/winfx/2006/xaml/presentation", "CB.CommonXaml")]
+
+#pragma warning disable IDE0019 // Utiliser les critères spéciaux
 
 namespace CB.Xaml
 {
@@ -170,6 +172,55 @@ namespace CB.Xaml
 	/// </summary>
 	public static class XamlHelper
 	{
+		/// <summary>
+		/// CB: Finds the first control of the given type <typeparamref name="T"/> in the path of the parent controls.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="container"></param>
+		/// <param name="includesThisControl"></param>
+		/// <returns></returns>
+		public static T FindFirstParentControlByType<T>(this FrameworkElement container, bool includesThisControl = false) where T : FrameworkElement
+		{
+			FrameworkElement found = null;
+			TraverseControlTreeUp(container,
+				e =>
+				{
+					if (e != null && e is T)
+					{
+						found = e;
+						return true;
+					}
+					return false;
+				},
+			includesThisControl
+				);
+			return found as T;
+		}
+
+		/// <summary>
+		/// CB: Traverses the control tree below this one (<paramref name="container"/>), searching for the first control that is of the given type (<typeparamref name="T"/>).
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="container"></param>
+		/// <param name="includesThisControl">Includes <paramref name="container"/> in the search.</param>
+		/// <returns></returns>
+		public static T FindFirstSubControlByType<T>(this FrameworkElement container, bool includesThisControl = false) where T : FrameworkElement
+		{
+			FrameworkElement found = null;
+			TraverseControlTreeDown(container,
+				e =>
+				{
+					if (e != null && e is T)
+					{
+						found = e;
+						return true;
+					}
+					return false;
+				},
+			includesThisControl
+				);
+			return found as T;
+		}
 
 #if WPF
 		/// <summary>
@@ -272,7 +323,7 @@ namespace CB.Xaml
 #endif // WPF
 
 		/// <summary>
-		/// Tells if the IDE's Xaml visual designer is running the executing assembly.
+		/// CB: Tells if the IDE's Xaml visual designer is running the executing assembly.
 		/// </summary>
 		/// <returns></returns>
 		public static bool IsXamlDesignerRunning
@@ -316,11 +367,11 @@ namespace CB.Xaml
 		public static void Loaded_InterceptAndManageExceptions<T>(this T control, XamlRoutedEventHandler<T> handler)
 			where T : FrameworkElement
 		{
-			control.Loaded += (sender, e) => controlLoaded<T>((T)sender, e, handler);
+			control.Loaded += (sender, e) => ControlLoaded<T>((T)sender, e, handler);
 		}
 
 		[Obfuscation(Exclude = true)]
-		static void controlLoaded<T>(T control, RoutedEventArgs e, XamlRoutedEventHandler<T> handler)
+		static void ControlLoaded<T>(T control, RoutedEventArgs e, XamlRoutedEventHandler<T> handler)
 			where T : FrameworkElement
 		{
 			try
@@ -346,18 +397,54 @@ namespace CB.Xaml
 		#endregion Loaded gérant les Exceptions
 
 		/// <summary>
+		/// CB: Translates a rect relative to this element to coordinates that are relative to the specified element.
+		/// </summary>
+		/// <param name="control"></param>
+		/// <param name="rect"></param>
+		/// <param name="relativeTo"></param>
+		/// <returns></returns>
+		public static Rect TranslateRect(this UIElement control, Rect rect, UIElement relativeTo)
+		{
+			var point = control.TranslatePoint(new Point(rect.X, rect.Y), relativeTo);
+			return new Rect(point, rect.Size);
+		}
+
+		/// <summary>
+		/// CB: Traverses the control upward.
+		/// </summary>
+		/// <param name="control"></param>
+		/// <param name="traverser"></param>
+		/// <param name="includesThisControl"></param>
+		public static void TraverseControlTreeUp(this FrameworkElement control, Func<FrameworkElement, bool> traverser, bool includesThisControl = false)
+		{
+			if (control == null || traverser == null)
+				throw new ArgumentNullException();
+			_TraverseControlTreeUp(control, traverser, includesThisControl);
+		}
+		static void _TraverseControlTreeUp(FrameworkElement control, Func<FrameworkElement, bool> traverser, bool includesThisControl)
+		{
+			if (includesThisControl)
+				if (traverser(control))
+					return;
+
+			var parent = control.Parent as FrameworkElement;
+			if (parent != null)
+				_TraverseControlTreeUp(parent, traverser, true);
+		}
+
+		/// <summary>
 		/// CB: Traverses the entire control tree below this control.
 		/// </summary>
 		/// <param name="control"></param>
 		/// <param name="traverser">Returns true to end the travel.</param>
 		/// <param name="includesThisControl"></param>
-		public static void TraverseTheControlTree(this FrameworkElement control, Func<FrameworkElement, bool> traverser, bool includesThisControl = true)
+		public static void TraverseControlTreeDown(this FrameworkElement control, Func<FrameworkElement, bool> traverser, bool includesThisControl = false)
 		{
 			if (control == null || traverser == null)
 				throw new ArgumentNullException();
-			_TraverseTheControlTree(control, traverser, includesThisControl);
+			_TraverseControlTreeDown(control, traverser, includesThisControl);
 		}
-		static void _TraverseTheControlTree(FrameworkElement control, Func<FrameworkElement, bool> traverser, bool includesThisControl)
+		static void _TraverseControlTreeDown(FrameworkElement control, Func<FrameworkElement, bool> traverser, bool includesThisControl)
 		{
 			if (includesThisControl)
 				if (traverser(control))
@@ -368,7 +455,7 @@ namespace CB.Xaml
 				{
 					var c = sousContrôles[i] as FrameworkElement;
 					if (c != null)
-						_TraverseTheControlTree(c, traverser, true);
+						_TraverseControlTreeDown(c, traverser, true);
 				}
 		}
 
@@ -470,3 +557,5 @@ namespace CB.Xaml
 
 
 }
+
+#pragma warning restore IDE0019 // Utiliser les critères spéciaux

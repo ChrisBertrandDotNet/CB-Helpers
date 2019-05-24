@@ -15,11 +15,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CB Helpers WPF", "CB Helper
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CB Helpers WindowsForms", "CB Helpers WindowsForms\CB Helpers WindowsForms.csproj", "{8286AABF-A35A-450D-949D-8F9699D483F4}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CB Helpers Standard", "CB Helpers Standard\CB Helpers Standard.csproj", "{9ABB452C-1350-4FBA-8683-E9A1E2D7746A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test Core", "Test Core\Test Core.csproj", "{FDA6E3DC-6A52-469F-93F8-C1A23E56D035}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Test Shared", "Test Shared\Test Shared.shproj", "{62A7E845-AAC8-4339-9FD1-7DD6506EB82B}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Common\Common.projitems*{1870b254-0655-43fe-822c-8d3946bb13eb}*SharedItemsImports = 4
 		Common\Common.projitems*{204d5821-e74b-4c41-877d-6df6efe3334b}*SharedItemsImports = 4
+		Test Shared\Test Shared.projitems*{204d5821-e74b-4c41-877d-6df6efe3334b}*SharedItemsImports = 4
 		Common\Common.projitems*{542d7c4f-2f81-4a12-ac07-c90dffd7d152}*SharedItemsImports = 4
+		Test Shared\Test Shared.projitems*{62a7e845-aac8-4339-9fd1-7dd6506eb82b}*SharedItemsImports = 13
 		Common\Common.projitems*{8286aabf-a35a-450d-949d-8f9699d483f4}*SharedItemsImports = 4
 		Common\Common.projitems*{c54a41f1-5a15-488d-9110-a5ddb0aa81ba}*SharedItemsImports = 13
 	EndGlobalSection
@@ -46,6 +54,14 @@ Global
 		{8286AABF-A35A-450D-949D-8F9699D483F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8286AABF-A35A-450D-949D-8F9699D483F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8286AABF-A35A-450D-949D-8F9699D483F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9ABB452C-1350-4FBA-8683-E9A1E2D7746A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ABB452C-1350-4FBA-8683-E9A1E2D7746A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ABB452C-1350-4FBA-8683-E9A1E2D7746A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ABB452C-1350-4FBA-8683-E9A1E2D7746A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDA6E3DC-6A52-469F-93F8-C1A23E56D035}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDA6E3DC-6A52-469F-93F8-C1A23E56D035}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDA6E3DC-6A52-469F-93F8-C1A23E56D035}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDA6E3DC-6A52-469F-93F8-C1A23E56D035}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

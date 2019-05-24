@@ -32,7 +32,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
-namespace CBdotnet
+namespace CB.Reflection
 {
 
 	/*internal static class AttributeEx

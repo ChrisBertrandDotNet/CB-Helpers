@@ -84,6 +84,24 @@
             Helpers for XAML.
             </summary>
         </member>
+        <member name="M:CB.Xaml.XamlHelper.FindFirstParentControlByType``1(System.Windows.FrameworkElement,System.Boolean)">
+            <summary>
+            CB: Finds the first control of the given type <typeparamref name="T"/> in the path of the parent controls.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="container"></param>
+            <param name="includesThisControl"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Xaml.XamlHelper.FindFirstSubControlByType``1(System.Windows.FrameworkElement,System.Boolean)">
+            <summary>
+            CB: Traverses the control tree below this one (<paramref name="container"/>), searching for the first control that is of the given type (<typeparamref name="T"/>).
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="container"></param>
+            <param name="includesThisControl">Includes <paramref name="container"/> in the search.</param>
+            <returns></returns>
+        </member>
         <member name="M:CB.Xaml.XamlHelper.GetChildrenObjects(System.Windows.FrameworkElement)">
             <summary>
             CB: Obtains the sub-objects of this control.
@@ -112,7 +130,7 @@
         </member>
         <member name="P:CB.Xaml.XamlHelper.IsXamlDesignerRunning">
             <summary>
-            Tells if the IDE's Xaml visual designer is running the executing assembly.
+            CB: Tells if the IDE's Xaml visual designer is running the executing assembly.
             </summary>
             <returns></returns>
         </member>
@@ -135,7 +153,24 @@
             <param name="control"></param>
             <param name="handler"></param>
         </member>
-        <member name="M:CB.Xaml.XamlHelper.TraverseTheControlTree(System.Windows.FrameworkElement,System.Func{System.Windows.FrameworkElement,System.Boolean},System.Boolean)">
+        <member name="M:CB.Xaml.XamlHelper.TranslateRect(System.Windows.UIElement,System.Windows.Rect,System.Windows.UIElement)">
+            <summary>
+            CB: Translates a rect relative to this element to coordinates that are relative to the specified element.
+            </summary>
+            <param name="control"></param>
+            <param name="rect"></param>
+            <param name="relativeTo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CB.Xaml.XamlHelper.TraverseControlTreeUp(System.Windows.FrameworkElement,System.Func{System.Windows.FrameworkElement,System.Boolean},System.Boolean)">
+            <summary>
+            CB: Traverses the control upward.
+            </summary>
+            <param name="control"></param>
+            <param name="traverser"></param>
+            <param name="includesThisControl"></param>
+        </member>
+        <member name="M:CB.Xaml.XamlHelper.TraverseControlTreeDown(System.Windows.FrameworkElement,System.Func{System.Windows.FrameworkElement,System.Boolean},System.Boolean)">
             <summary>
             CB: Traverses the entire control tree below this control.
             </summary>

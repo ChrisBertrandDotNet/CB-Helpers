@@ -1,0 +1,58 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>CB_Helpers_Standard</RootNamespace>
+    <Authors>Christophe Bertrand https://chrisbertrand.net</Authors>
+    <Product>CB Helpers</Product>
+    <Description>CB Helpers is a collection of programming helpers for .NET Standard. https://github.com/ChrisBertrandDotNet/CB-Helpers</Description>
+    <Version>1.2.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>P:\E\FREEWARE\CB Helpers\Public\Source\CB Helpers Standard\CB Helpers Standard.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>P:\E\FREEWARE\CB Helpers\Public\Source\CB Helpers Standard\CB Helpers Standard.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\CB.Data\CB.Data.Base32.cs" Link="CB.Data.Base32.cs" />
+    <Compile Include="..\CB.Data\CB.Data.BlockingCollectionAsICollection.cs" Link="CB.Data.BlockingCollectionAsICollection.cs" />
+    <Compile Include="..\CB.Data\CB.Data.Certify.cs" Link="CB.Data.Certify.cs" />
+    <Compile Include="..\CB.Data\CB.Data.Comparer.cs" Link="CB.Data.Comparer.cs" />
+    <Compile Include="..\CB.Data\CB.Data.EmptyArray.cs" Link="CB.Data.EmptyArray.cs" />
+    <Compile Include="..\CB.Data\CB.Data.EnumHelper.cs" Link="CB.Data.EnumHelper.cs" />
+    <Compile Include="..\CB.Data\CB.Data.ImmutableDictionary.cs" Link="CB.Data.ImmutableDictionary.cs" />
+    <Compile Include="..\CB.Data\CB.Data.ImmutableList.cs" Link="CB.Data.ImmutableList.cs" />
+    <Compile Include="..\CB.Data\CB.Data.NullableAny.cs" Link="CB.Data.NullableAny.cs" />
+    <Compile Include="..\CB.Data\CB.Data.StringTranscoder.cs" Link="CB.Data.StringTranscoder.cs" />
+    <Compile Include="..\CB.Execution\CB.Execution.Return.cs" Link="CB.Execution.Return.cs" />
+    <Compile Include="..\CB.Files\CB.Files.cs" Link="CB.Files.cs" />
+    <Compile Include="..\CB.Files\CB.Files.INI.cs" Link="CB.Files.INI.cs" />
+    <Compile Include="..\CB.Graphics\CB.Graphics.PixelBGR32.cs" Link="CB.Graphics.PixelBGR32.cs" />
+    <Compile Include="..\CB.OperatingSystem\CB.OperatingSystem.EnvironmentEx.cs" Link="CB.OperatingSystem.EnvironmentEx.cs" />
+    <Compile Include="..\CB.Parallelism\CB.Parallelism.ConsistentData.cs" Link="CB.Parallelism.ConsistentData.cs" />
+    <Compile Include="..\CB.Parallelism\CB.Parallelism.PositionList.cs" Link="CB.Parallelism.PositionList.cs" />
+    <Compile Include="..\CB.Processus\CB.Processus.ProcessEx.cs" Link="CB.Processus.ProcessEx.cs" />
+    <Compile Include="..\CB.Reflection\CB.Reflection.MemberInfoOf.cs" Link="CB.Reflection.MemberInfoOf.cs" />
+    <Compile Include="..\CB.Reflection\CB.Reflection.NameOf.cs" Link="CB.Reflection.NameOf.cs" />
+    <Compile Include="..\CB.Reflection\CB.Reflection.Reflection.cs" Link="CB.Reflection.Reflection.cs" />
+    <Compile Include="..\CB.Reflection\CB.Reflection.TypeEx.cs" Link="CB.Reflection.TypeEx.cs" />
+    <Compile Include="..\CB.Text\CB.Text.StringWithHashCode.cs" Link="CB.Text.StringWithHashCode.cs" />
+    <Compile Include="..\CB.Text\CB.Text.Unicode.cs" Link="CB.Text.Unicode.cs" />
+    <Compile Include="..\CB.Validation\CB.Validation.ContractConditions.cs" Link="CB.Validation.ContractConditions.cs" />
+    <Compile Include="..\CB.Xml\CB.Xml.AssemblyToXsd.cs" Link="CB.Xml.AssemblyToXsd.cs" />
+    <Compile Include="..\CB.Xml\CB.Xml.XML.cs" Link="CB.Xml.XML.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Win32.Registry" Version="4.5.0" />
+    <PackageReference Include="System.Security.Principal.Windows" Version="4.5.1" />
+  </ItemGroup>
+
+  <Import Project="..\Common\Common.projitems" Label="Shared" />
+
+</Project>

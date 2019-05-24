@@ -83,6 +83,26 @@ namespace CB.Xml
 		}
 
 		/// <summary>
+		/// Finds the first child node with matching tag name.
+		/// Return null if nothing is found, or if something went wrong.
+		/// </summary>
+		/// <param name="element"></param>
+		/// <param name="tagName"></param>
+		/// <returns>The matching child node, or null if nothing is found or if something went wrong</returns>
+		public static XmlNode GetChildByTagName(this XmlNode element, string tagName)
+		{
+			if (element == null) return null;
+			XmlNodeList nl = element.ChildNodes;
+			foreach (var node in nl)
+			{
+				var node2 = node as XmlNode;
+				if (node2?.Name == tagName)
+					return node2;
+			}
+			return null;
+		}
+
+		/// <summary>
 		/// CB: Returns the entire value, including xml sub-elements as a text.
 		/// </summary>
 		/// <param name="element"></param>

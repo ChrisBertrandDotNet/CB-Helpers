@@ -91,6 +91,9 @@
     <Compile Include="..\CB.Parallelism\CB.Parallelism.ConsistentData.cs">
       <Link>CB.Parallelism.ConsistentData.cs</Link>
     </Compile>
+    <Compile Include="..\CB.Parallelism\CB.Parallelism.PositionList.cs">
+      <Link>CB.Parallelism.PositionList.cs</Link>
+    </Compile>
     <Compile Include="..\CB.Processus\CB.Processus.ProcessEx.cs">
       <Link>CB.Processus.ProcessEx.cs</Link>
     </Compile>

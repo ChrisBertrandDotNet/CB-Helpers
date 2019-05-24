@@ -4,17 +4,19 @@
 // https://chrisbertrand.net
 
 /* Requires:
+. CB.Data\CB.Data.EmptyArray.cs
 . CB.Data\CB.Data.EnumHelper.cs
+. CB.Data\CB.Data.ImmutableList.cs
 . CB.Reflection\CB.Reflection.TypeEx.cs
 */
 
 /*
  * 
  * Gives (non-null) certified references.
- * It's a kind of contrary to Nullable&lt;T;gt;.
+ * It's a kind of contrary to Nullable<T>.
  * 
- * IMPORTANT: it may be easy to make a mistake: by defining a field NonNull&lt;&gt; without building an instance,
- * or a local variable initialized by default(NonNull&lt;&gt;),
+ * IMPORTANT: it may be easy to make a mistake: by defining a field NonNull<> without building an instance,
+ * or a local variable initialized by default(NonNull<>),
  * the compiler will not warn. The error will appear on the next value reading only.
  * 
  * For the String, use NonEmpty, that certifies the reference is not a String.Empty as well.
@@ -26,7 +28,7 @@
 #if TEST
 using CBdotnet.Test;
 #endif
-using CBdotnet;
+using CB.Reflection;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -87,9 +89,7 @@ namespace CB.Data
 			}
 			set
 			{
-				if (value == null)
-					throw new ArgumentNullException();
-				this._Value = value;
+				this._Value = value ?? throw new ArgumentNullException();
 			}
 		}
 
@@ -100,9 +100,7 @@ namespace CB.Data
 		/// <exception cref="System.ArgumentNullException">The value is a null reference.</exception>
 		public NonNull(T value)
 		{
-			if (value == null)
-				throw new ArgumentNullException();
-			this._Value = value;
+			this._Value = value ?? throw new ArgumentNullException();
 		}
 
 		/// <summary>
@@ -716,6 +714,7 @@ namespace CB.Data
 	/// <item>The <see cref="IBounded{T}.Value"/> must be lower, or equal depending on <see cref="IBounded{T}.RangeIncludesTheMaximum"/>, to <see cref="IBounded{T}.Maximum"/>.</item>
 	/// </list>
 	/// </para>
+	/// <para>Please note the word Bounded comes from mathematics (see https://en.wikipedia.org/wiki/Bounded_set for more information).</para>
 	/// </summary>
 	/// <typeparam name="T"></typeparam>
 	public interface IBounded<T>

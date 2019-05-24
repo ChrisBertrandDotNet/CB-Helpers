@@ -16,19 +16,16 @@ public partial class TestHelpers
 		DefinedString name = CultureInfo.CurrentUICulture.Name; // implicitly transcoded. 'name' is guaranted not to be null or empty.
 
 		DefinedEnum<System.PlatformID> Windows = System.PlatformID.Win32NT; // ok, this value is declared in its enumeration.
-		try { DefinedEnum<System.PlatformID> MyOwnSystem = (System.PlatformID)1000; } // Wrong ! That will throw an ArgumentException.
-		catch (ArgumentException) { }
+		Release.ExceptionIsExpected<ArgumentException>(() => { DefinedEnum<System.PlatformID> MyOwnSystem = (System.PlatformID)1000; }); // Wrong ! That will throw an ArgumentException.
 
 		#region Bounded values thanks to a specific class
 
 		var number1 = new Percentage(50); // ok, 50 is between 0 and 100.
-		try { var number2 = new Percentage(-200); } // Wrong ! That will throw an ArgumentOutOfRangeException();
-		catch (ArgumentOutOfRangeException) { }
+		Release.ExceptionIsExpected<ArgumentOutOfRangeException>(() => { var number2 = new Percentage(-200); }); // Wrong ! That will throw an ArgumentOutOfRangeException();
 
 		Minute m = 30;
 		var m2 = Minute.TryCreate(100); // returns null because this value is not in the range.
-		try { var m3 = new Minute(1000); } // Wrong ! That will throw an ArgumentOutOfRangeException();
-		catch (ArgumentOutOfRangeException) { }
+		Release.ExceptionIsExpected<ArgumentOutOfRangeException>(() => { var m3 = new Minute(1000); });// Wrong ! That will throw an ArgumentOutOfRangeException();
 
 		#endregion Bounded values thanks to a specific class
 
